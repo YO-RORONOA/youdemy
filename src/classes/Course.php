@@ -52,5 +52,32 @@ class Course
     }
 
 
+    public function updateCourse($id)
+{
+    $query = "UPDATE course 
+              SET title = :title, description = :description, content = :content, 
+                  categoryid = :categoryId, wallpaper_url = :wallpaper
+              WHERE id = :id";
+    
+    $stmt = $this->db->prepare($query);
+
+    $stmt->bindParam(':title', $this->title);
+    $stmt->bindParam(':description', $this->description);
+    $stmt->bindParam(':content', $this->content);
+    $stmt->bindParam(':categoryId', $this->categoryId);
+    $stmt->bindParam(':wallpaper_url', $this->wallpaper);
+    $stmt->bindParam(':id', $id);
+
+    return $stmt->execute();  
+}
+
+public function deleteCourse($id) {
+    $query = "DELETE FROM course WHERE id = :id";
+    $stmt = $this->db->prepare($query);
+    $stmt->bindParam(':id', $id);
+    return $stmt->execute();
+}
+
+
 
 }
