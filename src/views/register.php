@@ -24,7 +24,7 @@ unset($_SESSION['error_message'], $_SESSION['formdata']);
         <div class="card card-custom shadow-lg w-100 overflow-hidden overflow-scrollable">
             <div class="row g-0">
                 <div class="col-md-6 d-none d-md-block">
-                    <img src="../../assets/pics/login-office.jpeg" class="img-cover" alt="Office">
+                    <img src="../../assets/pics/register-logo.jpg" class="img-cover" alt="Office">
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                     <div class="card-body w-100">
@@ -39,11 +39,18 @@ unset($_SESSION['error_message'], $_SESSION['formdata']);
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input name="email" type="email" class="form-control" id="email" placeholder="example@mail.com">
+                                <input name="email" type="email" class="form-control" id="email" placeholder="example@mail.com"value="<?php echo isset($formData['email']) ? $formData['email'] : ''; ?>">
+                            <?php if(isset($errors['email'])): ?>
+                                <small class="text-danger"><?php echo $errors['email']; ?></small>
+                            <?php endif; ?>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input name="password" type="password" class="form-control" id="password" placeholder="********">
+                                <input name="password" type="password" class="form-control" id="password" placeholder="********"value="<?php isset($formData['password']) ? $formData['password']: ''; ?>">
+                            <?php if(isset($errors['password'])):?>
+                                <small class="text-danger"><?php echo $errors['password'];?></small>
+                            <?php endif;?>
+
                             </div>
                             <div class="mb-3">
                                 <label for="role" class="form-label">Role</label>
@@ -54,7 +61,11 @@ unset($_SESSION['error_message'], $_SESSION['formdata']);
                             </div>
                             <div class="mb-3">
                                 <label for="profilePicture" class="form-label">Profile Picture (URL)</label>
-                                <input name="profil" type="url" class="form-control" id="profilePicture" placeholder="https://example.com/profile.jpg">
+                                <input name="profil" type="url" class="form-control" id="profilePicture" placeholder="https://example.com/profile.jpg"
+                                    value="<?php isset($formData['profil']) ? $formData['profil']: ''; ?>">
+                            <?php if(isset($errors['profil'])):?>
+                                <small class="text-danger"><?php echo $errors['profil'];?></small>
+                            <?php endif;?>
                             </div>
                             <button name="submit" type="submit" class="btn btn-primary w-100">Register</button>
                         </form>

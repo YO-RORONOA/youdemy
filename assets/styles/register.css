@@ -18,3 +18,19 @@
     max-height: 90vh;
     overflow-y: auto;
 }
+
+
+.card-body {
+    overflow: scroll;
+}
+
+/* For Webkit-based browsers (Chrome, Safari, Edge) */
+.card-body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+/* For Firefox */
+.card-body {
+    scrollbar-width: none;  /* Hide scrollbar in Firefox */
+}

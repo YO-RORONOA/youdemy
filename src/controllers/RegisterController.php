@@ -3,6 +3,7 @@
 require '../classes/User.php';
 require '../config/config.php';
 
+session_start();
 
 
 class Registercontroller
@@ -55,11 +56,11 @@ class Registercontroller
             }
 
             if (empty($this->profil)) {
-                $error_message['profile_picture'] = "Profile picture is required.";
+                $error_message['profil'] = "Profile picture is required.";
             } elseif (!filter_var($this->profil, FILTER_VALIDATE_URL)) {
-                $error_message['profile_picture'] = "Please enter a valid URL.";
+                $error_message['profil'] = "Please enter a valid URL.";
             } elseif (substr($this->profil, 0, 8) !== "https://") {
-                $error_message['profile_picture'] = "Profile picture URL must start with 'https://'.";
+                $error_message['profil'] = "Profile picture URL must start with 'https://'.";
             }
 
             $this->hashedpassword = password_hash($this->password, PASSWORD_DEFAULT);

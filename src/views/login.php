@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+$errors = isset($_SESSION['text_error']) ? $_SESSION['text_error'] : [];
+unset($_SESSION['text_error']);
+?>
+
+<?php if (!empty($errors)): ?>
+    <div class="alert alert-danger">
+        <?= implode('<br>', $errors); ?>
+    </div>
+<?php endif; ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,16 +32,16 @@
                 <div class="col-md-6 d-flex align-items-center">
                     <div class="card-body">
                         <h1 class="card-title text-center mb-4">Login</h1>
-                        <form>
+                        <form method="POST" action="../controllers/loginController.php">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Jane Doe">
+                                <input name="email" type="email" class="form-control" id="email" placeholder="Jane Doe">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="***************">
+                                <input name="password" type="password" class="form-control" id="password" placeholder="***************">
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">Log in</button>
+                            <button name="submit" type="submit" class="btn btn-primary w-100">Log in</button>
                         </form>
                         <p class="text-center mt-4"><a href="./forgot-password.html">Forgot your password?</a></p>
                         <p class="text-center"><a href="./create-account.html">Create account</a></p>
