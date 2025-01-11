@@ -30,4 +30,25 @@ class Users
     }
 
 
+    public function createUser()
+    {
+        $query = "INSERT into users(name, email, password, role)
+        values(:name, :email, :password, :role)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindparam('name', $this->name);
+        $stmt->bindparam('email', $this->email);
+        $stmt->bindparam('password', $this->password);
+        $stmt->bindparam('role', $this->role);
+        return $stmt->execute();
+    }
+
+    public function getUserbyemail($email)
+    {
+        $query = "SELECT * from users
+        where email = :email";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindparam('email', $email);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
