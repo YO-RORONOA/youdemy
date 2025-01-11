@@ -58,10 +58,11 @@ class Users
         }
     }
 
-    public function deleteUser($pdo) {
-        $sql = "DELETE FROM users WHERE id = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$this->id]);
+    public function deleteUser($id) {
+        $sql = "DELETE FROM users WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindparam('id', $id);
+        return $stmt->execute;
     }
 
 
