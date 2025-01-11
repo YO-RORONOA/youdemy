@@ -1,0 +1,20 @@
+.card-custom {
+    height: auto;
+    max-width: 700px;
+}
+.img-cover {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+}
+@media (max-width: 768px) {
+    .img-cover {
+        border-radius: .5rem .5rem 0 0;
+    }
+}
+.overflow-scrollable {
+    max-height: 90vh;
+    overflow-y: auto;
+}
