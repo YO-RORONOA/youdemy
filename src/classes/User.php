@@ -51,4 +51,12 @@ class Users
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function approveTeacher() {
+        if ($this->role === 'teacher') {
+            $this->isApproved = true;
+        }
+    }
+
+
 }
