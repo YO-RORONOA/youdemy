@@ -1,6 +1,7 @@
 <?php
 
-// require '../classes/User.php';
+require '../classes/User.php';
+require '../config/config.php';
 
 
 
@@ -81,3 +82,10 @@ class Registercontroller
         $this->user->createuser();
     }
 }
+
+
+
+
+$validate = new Registercontroller;
+
+$validate->validateform($_POST);

@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+$errors = isset($_SESSION['error_message']) ? $_SESSION['error_message'] : [];
+$formData = isset($_SESSION['formdata']) ? $_SESSION['formdata'] : [];
+unset($_SESSION['error_message'], $_SESSION['formdata']);
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,10 +29,13 @@
                 <div class="col-md-6 d-flex align-items-center">
                     <div class="card-body w-100">
                         <h1 class="card-title text-center mb-4">Register</h1>
-                        <form>
+                        <form method="POST" action="../controllers/RegisterController.php">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
-                                <input name="name" type="text" class="form-control" id="name" placeholder="John Doe">
+                                <input name="name" type="text" class="form-control" id="name" placeholder="John Doe"value="<?php echo isset($formData['name']) ? $formData['name'] : ''; ?>">
+                            <?php if (isset($errors['name'])): ?>
+                                <small class="text-danger"><?php echo $errors['name']; ?></small>
+                            <?php endif; ?>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
@@ -42,7 +56,7 @@
                                 <label for="profilePicture" class="form-label">Profile Picture (URL)</label>
                                 <input name="profil" type="url" class="form-control" id="profilePicture" placeholder="https://example.com/profile.jpg">
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">Register</button>
+                            <button name="submit" type="submit" class="btn btn-primary w-100">Register</button>
                         </form>
                         <p class="text-center mt-4"><a href="./login.html">Already have an account? Log in</a></p>
                     </div>
