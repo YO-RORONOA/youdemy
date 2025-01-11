@@ -21,26 +21,26 @@
                         <form>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" placeholder="John Doe">
+                                <input name="name" type="text" class="form-control" id="name" placeholder="John Doe">
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="example@mail.com">
+                                <input name="email" type="email" class="form-control" id="email" placeholder="example@mail.com">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="********">
+                                <input name="password" type="password" class="form-control" id="password" placeholder="********">
                             </div>
                             <div class="mb-3">
                                 <label for="role" class="form-label">Role</label>
-                                <select class="form-select" id="role">
+                                <select name="role" class="form-select" id="role">
                                     <option value="teacher">Teacher</option>
                                     <option value="student">Student</option>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label for="profilePicture" class="form-label">Profile Picture (URL)</label>
-                                <input type="url" class="form-control" id="profilePicture" placeholder="https://example.com/profile.jpg">
+                                <input name="profil" type="url" class="form-control" id="profilePicture" placeholder="https://example.com/profile.jpg">
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Register</button>
                         </form>
