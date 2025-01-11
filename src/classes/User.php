@@ -65,5 +65,13 @@ class Users
         return $stmt->execute;
     }
 
+    public function getAllusers()
+    {
+        $sql = "SELECT * from users";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchall(PDO::FETCH_ASSOC);
+    }
+
 
 }
