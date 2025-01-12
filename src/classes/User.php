@@ -10,6 +10,7 @@ class Users
     private $email;
     private $password;
     private $role;
+    private $profil;
     private $isApproved;
     private $createdAt;
 
@@ -19,7 +20,7 @@ class Users
         $this->db = $db;
     }
 
-    public function setAttributes($name, $email, $password, $role ='student')
+    public function setAttributes($name, $email, $password, $role ='student', $profil)
     {
         $this->name = $name;
         $this->email = $email;
@@ -27,18 +28,20 @@ class Users
         $this->role = $role;
         $this->isApproved = ($role === 'teacher') ? false : true;
         $this->createdAt = date('Y-m-d H:i:s');
+        $this->profil = $profil;
     }
 
 
     public function createUser()
     {
-        $query = "INSERT into users(name, email, password, role)
-        values(:name, :email, :password, :role)";
+        $query = "INSERT into users(name, email, password, role, profil)
+        values(:name, :email, :password, :role, :profil)";
         $stmt = $this->db->prepare($query);
         $stmt->bindparam('name', $this->name);
         $stmt->bindparam('email', $this->email);
         $stmt->bindparam('password', $this->password);
         $stmt->bindparam('role', $this->role);
+        $stmt->bindparam('profil', $this->profil);
         return $stmt->execute();
     }
 

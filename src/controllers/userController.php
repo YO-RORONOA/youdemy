@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../classes/User.php';
 
 class Usercontroller
 {
@@ -15,13 +17,11 @@ class Usercontroller
     }
 
 
-    public function getallusers()
+    public function getAllusers()
     {
-        $this->user->getallusers();
+        return $this->user->getAllusers();
     }
 
 
 }
 
-$dashUser = new Usercontroller;
-$allusers = $dashUser->getallusers();

@@ -79,7 +79,7 @@ class Registercontroller
 
     public function createuser()
     {
-        $this->user->setattributes($this->name, $this->email, $this->hashedpassword, $this->role);
+        $this->user->setattributes($this->name, $this->email, $this->hashedpassword, $this->role, $this->profil);
         $this->user->createuser();
     }
 }
