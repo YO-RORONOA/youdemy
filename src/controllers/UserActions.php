@@ -1,5 +1,6 @@
 <?php
-
+require '../classes/User.php';
+require '../config/config.php';
 
 class UserActions
 {

@@ -7,6 +7,18 @@ require '../../controllers/userController.php';
 $dashUser = new Usercontroller;
 $allusers = $dashUser->getAllusers();
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $userId = $_POST['user_id'];
+    $action = $_POST['action']; 
+
+    $result = $dashUser->handleRequest($action, $userId);
+
+    echo json_encode(['success' => $result]);
+    exit;
+
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,10 +72,10 @@ $allusers = $dashUser->getAllusers();
                                 </td>
                                 <td>
                                     <?php if ($user['status'] !== 'active'): ?>
-                                        <button data-id="<?= $user['id'];?>" class="btn btn-success btn-sm activate">Activate</button>
+                                        <button data-id="<?= $user['id'];?>" class="btn btn-success btn-sm activate-btn">Activate</button>
                                     <?php endif; ?>
                                     <?php if ($user['status'] !== 'suspended'): ?>
-                                        <button data-id="<?= $user['id'];?>" class="btn btn-warning btn-sm suspend">Suspend</button>
+                                        <button data-id="<?= $user['id'];?>" class="btn btn-warning btn-sm suspend-btn">Suspend</button>
                                     <?php endif; ?>
                                     <button data-id="<?= $user['id'];?>" class="btn btn-danger btn-sm delete-btn">Delete</button>
                                 </td>
@@ -74,6 +86,9 @@ $allusers = $dashUser->getAllusers();
             </div>
         </div>
     </div>
+
+
+    <script src="../../../assets/js/usersAjax.js"></script>
 
 
   </body>
