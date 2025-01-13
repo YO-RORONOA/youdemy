@@ -1,3 +1,18 @@
+<?php
+
+require_once __DIR__ . '/../../controllers/categorieController.php';
+require_once __DIR__ . '/../../controllers/TagController.php';
+
+$controller = new CategorieController;
+$categories = $controller->getAllCategories();
+
+$tagcontroller = new TagController;
+$tags = $tagcontroller->getAllTags();
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +20,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Course - Teacher Dashboard</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../assets/styles/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@5.9.0/dist/css/coreui.min.css" rel="stylesheet" integrity="sha384-Ve7hQpTs/xy/JZqnD4/SWFwF0wi2txt/YGb48ABl4PnkLahmKdTS0EMBgFX2v4Hr" crossorigin="anonymous">
+
+
 </head>
 <body>
     <div class="container my-5">
@@ -38,13 +57,18 @@
                         <select class="form-control" id="category" name="category" required>
                             <option value="">Select a category</option>
                             <!-- Populate categories dynamically -->
+                            <?php foreach ($categories as $categorie): ?>
+                                <option value="<?= $categorie['id'] ?>"><?= $categorie['name'] ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="tags">Tags</label>
-                        <select class="form-control" id="tags" name="tags" multiple required>
-                            <!-- Populate tags dynamically -->
-                        </select>
+                        <select class="form-multi-select" multiple data-coreui-search="true">
+                        <?php foreach ($tags as $tag): ?>
+                                <option value="<?= $tag['id'] ?>"><?= $tag['name'] ?></option>
+                            <?php endforeach; ?>                      
+                          </select>
                     </div>
                     <div class="form-group">
                         <label for="wallpaperUrl">Wallpaper URL</label>
