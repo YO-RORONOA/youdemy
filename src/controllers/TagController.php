@@ -22,13 +22,13 @@ class TagController
     public function createTag($data)
     {
         echo'error';
-        $name_tag = trim($data['namecategorie']);
+        $name_tag = trim($data['nametag']);
 
-        if (empty($name_categorie)) {
+        if (empty($name_tag)) {
             $this->error_message['error_message'] = 'Tag name is required.';
-        } elseif (strlen($name_categorie) < 3) {
+        } elseif (strlen($name_tag) < 3) {
             $this->error_message['error_message'] = "Tag name must be at least 3 characters.";
-        } elseif (!preg_match("/^[a-zA-Z\s]+$/", $name_categorie)) {
+        } elseif (!preg_match("/^[a-zA-Z\s]+$/", $name_tag)) {
             $this->error_message['error_message'] = "Tag name must only contain letters and spaces.";
         }
 
@@ -42,9 +42,9 @@ class TagController
         $this->tag->setTag($name_tag);
 
         if ($this->tag->createTag()) {
-            $_SESSION['success_message'] = "Category successfully created!";
+            $_SESSION['success_message'] = "tag successfully created!";
         } else {
-            $_SESSION['error_message'] = ["Failed to create category. Please try again."];
+            $_SESSION['error_message'] = ["Failed to create tag. Please try again."];
         }
         header('Location: ../views/admin/tagsControl.php');
     }
@@ -55,9 +55,9 @@ class TagController
         return $this->tag->getAllTags();
     }
 
-    public function editTag($id, $newcategorie)
+    public function editTag($id, $newtag)
     {
-        return $this->tag->editTag($id, $newcategorie);
+        return $this->tag->editTag($id, $newtag);
     }
 
     public function deleteTag($id)
@@ -75,3 +75,19 @@ class TagController
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
+
+
+
+if(empty($_POST['tag_id']) && isset($_POST['nametag'])) {
+
+    $controller = new TagController;
+    $controller->createTag($_POST);
+}
+
+elseif (!empty($_POST['tag_id']) && empty($_POST['action']))
+{
+    $controller = new TagController;
+    $controller->editTag($_POST['tag_id'], $_POST['nametag']);
+    header('Location: ../views/admin/tagsControl.php');
+}
+

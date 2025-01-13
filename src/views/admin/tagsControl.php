@@ -2,6 +2,9 @@
 
 require_once __DIR__ . '/../../controllers/TagController.php';
 
+$controller = new TagController;
+$tags = $controller->getAllTags();
+$index = 1;
 ?>
 
 
