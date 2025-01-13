@@ -13,13 +13,18 @@ class Course
     private $teacherId;
     private $categoryId;
     private $tags = [];
+    private $content_type;
+    private $video_hours;
+    private $nb_articles;
+    private $nb_resources;
 
     public function __construct($db)
     {
         $this->db = $db;       
     }
 
-    public function setAttributes($title, $description, $content, $teacherId, $categoryId, $wallpaper)
+    public function setAttributes($title, $description, $content, $teacherId, 
+    $categoryId, $wallpaper, $content_type, $video_hours, $nb_articles, $nb_resources)
     {
         $this->title = $title;
         $this->description = $description;
@@ -27,12 +32,16 @@ class Course
         $this->teacherId = $teacherId;
         $this->categoryId = $categoryId;
         $this->wallpaper = $wallpaper;
+        $this->content_type = $content_type;
+        $this->video_hours = $video_hours;
+        $this->nb_articles = $nb_articles;
+        $this->nb_resources = $nb_resources;
     }
 
     public function createCourse()
     {
-        $query = "INSERT into course(title, description, content, teacher_id, categorie_id, wallpaper_url)
-        values(:title, :description, :content, :teacher_id, :categorie_id, :wallpaper_url)";
+        $query = "INSERT into course(title, description, content, teacher_id, categorie_id, wallpaper_url, content_type, video_hours, nb_articles, nb_resources)
+        values(:title, :description, :content, :teacher_id, :categorie_id, :wallpaper_url, :content_type, :video_hours, :nb_articles, :nb_resources)";
         $stmt= $this->db->prepare($query);
         $stmt->bindParam(':title', $this->title);
         $stmt->bindParam(':description', $this->description);
@@ -40,6 +49,11 @@ class Course
         $stmt->bindParam(':teacher_id', $this->teacherId);
         $stmt->bindParam(':categorie_id', $this->categoryId);
         $stmt->bindParam(':wallpaper_url', $this->wallpaper);
+        $stmt->bindParam(':content_type', $this->content_type);
+        $stmt->bindParam(':video_hours', $this->video_hours);
+        $stmt->bindParam(':nb_articles', $this->nb_articles);
+        $stmt->bindParam(':nb_resources', $this->nb_resources);
+
         return $stmt->execute();
     }
 

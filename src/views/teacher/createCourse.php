@@ -13,7 +13,7 @@
                 <h4>Create a New Course</h4>
             </div>
             <div class="card-body">
-                <form id="createCourseForm">
+                <form method="POST" action="../../controllers/teachercontroller/CourseController.php" id="createCourseForm">
                     <div class="form-group">
                         <label for="courseTitle">Course Title</label>
                         <input type="text" class="form-control" id="courseTitle" name="courseTitle" placeholder="Enter course title" required>
@@ -62,18 +62,12 @@
                         <label for="resources">Downloadable Resources</label>
                         <input type="number" class="form-control" id="resources" name="resources" placeholder="Enter number of resources" required>
                     </div>
-                    <div class="form-group">
-                        <label for="access">Access Options</label>
-                        <input type="text" class="form-control" id="access" name="access" placeholder="Enter access options (e.g., mobile, TV)" required>
-                    </div>
                     <button type="submit" class="btn btn-primary">Create Course</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

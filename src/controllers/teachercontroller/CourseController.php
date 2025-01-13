@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../classes/Course.php';
 
@@ -19,11 +20,29 @@ class CategorieController
     }
 
 
+    public function createCourse($title, $description, $content, $teacherId, $categoryId, $wallpaper,  $content_type, $video_hours, $nb_articles, $nb_resources)
+    {
+        $this->course->setAttributes($title, $description, $content, $teacherId, $categoryId, $wallpaper,  $content_type, $video_hours, $nb_articles, $nb_resources);
+        return $this->course->createCourse();
+    }
+
+
+    public function getAllCourses()
+    {
+        return $this->course->getAllcourses();
+    }
 
 
 
 
 
 
-    
+
+
+
+
+
+
+
+
 }

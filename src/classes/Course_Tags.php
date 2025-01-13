@@ -1,4 +1,6 @@
 <?php
+
+
 class CourseTag {
     private $courseId;
     private $tagId;
