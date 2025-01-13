@@ -1,3 +1,13 @@
+<?php
+
+require_once __DIR__ . '/../../controllers/categorieController.php';
+
+$controller = new CategorieController;
+$categories = $controller->getAllCategories();
+$index = 1;
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +24,7 @@
                 <h4 class="mb-0">Manage Categories</h4>
             </div>
             <div class="card-body">
-                <form action="../controllers/categorieController.php" method="POST" class="mb-4">
+                <form action="../../controllers/CategorieController.php" method="POST" class="mb-4">
                     <div class="mb-3">
                         <label for="category_name" class="form-label">Category Name:</label>
                         <input type="text" class="form-control" id="category_name" name="namecategorie" required>
@@ -34,11 +44,11 @@
                         <?php foreach($categories as $categorie):?>
                         <tr>
                             <td><?= $index++;?></td>
-                            <td><?= htmlspecialchars($categorie['name_categorie']);?></td>
+                            <td><?= htmlspecialchars($categorie['name']);?></td>
                             <td>
                                 <a href="categorieManagement.php?id=<?=$categorie['id'];?>" class="btn btn-primary btn-sm" data-bs-toggle="modal" onclick="loadCategoryData(this)" 
                                 data-bs-target="#editCategoryModal" data-id="<?= $categorie['id']; ?>">Modify</a>
-                                <a class="btn btn-danger btn-sm delete-btn" data-id="<?= $categorie['id']; ?>">Delete</a>
+                                <a class="btn btn-danger btn-sm suppression" data-id="<?= $categorie['id']; ?>">Delete</a>
                             </td>
                         </tr>
                         <?php endforeach;?>
@@ -58,7 +68,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="../controllers/categorieController.php" method="POST">
+                    <form action="../../controllers/CategorieController.php" method="POST">
                         <div class="mb-3">
                             <label for="category_name" class="form-label">Category Name:</label>
                             <input type="text" class="form-control" id="category_modal" name="namecategorie" required>
@@ -72,6 +82,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/ajax.js"></script>
+    <script src="../../../assets/js/usersAjax.js" defer></script>
+    <script src="../../../assets/js/deletebutt.js" defer></script>
+
 </body>
 </html>

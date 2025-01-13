@@ -36,7 +36,7 @@ class Categorie
     public function editCategory($id, $newname) {
             $query = "UPDATE categories SET name = :newname WHERE id = :id";
             $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':name', $newname);
+            $stmt->bindParam(':newname', $newname);
             $stmt->bindParam(':id', $id);
             return $stmt->execute();
     }

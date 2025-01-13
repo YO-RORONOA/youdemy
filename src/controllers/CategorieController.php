@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../classes/Categorie.php';
 
 
 
@@ -19,7 +21,7 @@ class CategorieController
 
     public function createCategorie($data)
     {
-
+        echo'error';
         $name_categorie = trim($data['namecategorie']);
 
         if (empty($name_categorie)) {
@@ -44,8 +46,7 @@ class CategorieController
         } else {
             $_SESSION['error_message'] = ["Failed to create category. Please try again."];
         }
-        header('Location: ../views/categorieManagement.php');
-        exit();
+        header('Location: ../views/admin/categorieControl.php');
     }
 
 
@@ -74,3 +75,43 @@ class CategorieController
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
+
+
+if(empty($_POST['category_id']) && isset($_POST['namecategorie'])) {
+
+    $controller = new CategorieController;
+    $controller->createCategorie($_POST);
+}
+
+elseif (!empty($_POST['category_id']) && empty($_POST['action']))
+{
+    $controller = new categorieController;
+    $controller->editCategories($_POST['category_id'], $_POST['namecategorie']);
+    header('Location: ../views/admin/categorieControl.php');
+}
+   
+    
+if (isset($_GET['id'])) {
+    $controller = new CategorieController();
+    $category = $controller->getCategoryById($_GET['id']); 
+
+    echo json_encode($category);
+    exit;
+}
+
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+    if ($_POST['action'] === 'delete') {
+        $controller = new CategorieController();
+        $categoryId = intval($_POST['category_id']);
+
+        if ($controller->deleteCategory($categoryId)) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Failed to delete category.']);
+        }
+        exit;
+    } 
+} 
+
