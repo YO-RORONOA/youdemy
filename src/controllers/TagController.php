@@ -74,14 +74,43 @@ class TagController
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function bulkInsertTags($tags)
+    {
+        try
+        {
+            $this->db->beginTransaction();
+            
+            $stmt = $this->db->prepare("INSERT into tags(name) values(:tags)");
+            foreach($tags as $tag)
+            {
+                if(!empty($tag))
+                {
+                    $stmt->bindparam(':tags', $tag);
+                    $stmt->execute();
+                }
+            }
+            $this->db->commit();
+            $error_message['tag-sucesseful'] = "tags added successfully";
+        }
+ catch (PDOException $e) {
+        $this->db->rollBack();
+        echo "Error: " . $e->getMessage();
+    }
 }
 
+}
 
 
 if(empty($_POST['tag_id']) && isset($_POST['nametag'])) {
 
+    $tagsInput = $_POST['nametag'];
+    $tagArray = array_map('trim', explode(',', $tagsInput));
+
     $controller = new TagController;
-    $controller->createTag($_POST);
+    $controller->bulkInsertTags($tagArray);
+    header('Location: ../views/admin/tagsControl.php');
+
 }
 
 elseif (!empty($_POST['tag_id']) && empty($_POST['action']))
