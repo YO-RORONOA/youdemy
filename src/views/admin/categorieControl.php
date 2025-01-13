@@ -48,7 +48,7 @@ $index = 1;
                             <td>
                                 <a href="categorieManagement.php?id=<?=$categorie['id'];?>" class="btn btn-primary btn-sm" data-bs-toggle="modal" onclick="loadCategoryData(this)" 
                                 data-bs-target="#editCategoryModal" data-id="<?= $categorie['id']; ?>">Modify</a>
-                                <a class="btn btn-danger btn-sm suppression" data-id="<?= $categorie['id']; ?>">Delete</a>
+                                <a onclick= "fetchdata('Categoriecontroller', '<?= $categorie['id']; ?>', 'category')" class="btn btn-danger btn-sm suppression" data-id="<?= $categorie['id']; ?>">Delete</a>
                             </td>
                         </tr>
                         <?php endforeach;?>

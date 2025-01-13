@@ -120,3 +120,20 @@ elseif (!empty($_POST['tag_id']) && empty($_POST['action']))
     header('Location: ../views/admin/tagsControl.php');
 }
 
+
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+    if ($_POST['action'] === 'delete') {
+        $controller = new TagController();
+        $Id = intval($_POST['id']);
+
+        if ($controller->deletetag($Id)) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Failed to delete tag.']);
+        }
+        exit;
+    } 
+} 
+

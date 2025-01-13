@@ -48,7 +48,7 @@ $index = 1;
                             <td>
                                 <a href="categorieManagement.php?id=<?=$tag['id'];?>" class="btn btn-primary btn-sm" data-bs-toggle="modal" onclick="loadCategoryData(this)" 
                                 data-bs-target="#editTagModal" data-id="<?= $tag['id']; ?>">Modify</a>
-                                <a class="btn btn-danger btn-sm suppression" data-id="<?= $tag['id']; ?>">Delete</a>
+                                <a onclick="fetchdata('Tagcontroller', '<?= $tag['id'] ?>', 'tag')" class="btn btn-danger btn-sm tag-del" data-id="<?= $tag['id']; ?>">Delete</a>
                             </td>
                         </tr>
                         <?php endforeach;?>
