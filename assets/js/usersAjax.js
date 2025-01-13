@@ -139,26 +139,49 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-async function  loadCategoryData(button) {
-    var categoryId = button.getAttribute('data-id');  
-    var xhr = new XMLHttpRequest();                  
+async function loadData(controller, id) {
+    try {
+        const response = await fetch(`../../controllers/${controller}.php?id=${id}`);
+        console.log(response)
 
-    
-    xhr.open('GET', '../admin/categorieControl.php/categorieController.php?id=' + categoryId, true);
-
-   
-    xhr.onload = function() {
-        if (xhr.status === 200) { 
-            var category = JSON.parse(xhr.responseText);
-            document.getElementById('category_modal').value = category.name; 
-            document.getElementById('category_id').value = category.id;      
-        } else {
-            alert('Error loading category data.');
+        const responseData = await response.json();
+        console.log(responseData)
+        
+        
+        document.getElementById('tag_modal').value = responseData.name; 
+        document.getElementById('tag_id').value = responseData.id;      
+        
+        if (!response.ok) {
+            throw new Error('Error loading category data.');
         }
-    };
+  
 
-    xhr.send();  
-    
+    } catch (error) {
+        alert(error.message);
+    }
+}
+
+
+function fetchdata(controller, id, type) {
+    if (confirm(`Are you sure you want to delete this ${type}?`)) {
+        fetch(`../../controllers/${controller}.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `action=delete&id=${id}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(`${type} deleted successfully!`);
+                document.querySelector(`a[data-id="${id}"]`).closest('tr').remove();
+            } else {
+                alert(`Error deleting ${type}: ` + data.message);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
 }
 
 

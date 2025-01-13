@@ -123,6 +123,29 @@ elseif (!empty($_POST['tag_id']) && empty($_POST['action']))
 
 
 
+
+if (isset($_GET['id'])) {
+    $controller = new TagController();
+    $tag = $controller->getTagId($_GET['id']); 
+
+    // Return category data as JSON for the JavaScript AJAX call
+    echo json_encode($tag);
+    exit;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if ($_POST['action'] === 'delete') {
         $controller = new TagController();

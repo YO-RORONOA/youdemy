@@ -31,7 +31,7 @@ class Tag {
 
     public function edittag($id, $newtag)
     {
-        $query = "UPDATE tags set name_tag = :newtag where id= :id";
+        $query = "UPDATE tags set name = :newtag where id= :id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':newtag', $newtag);
         $stmt->bindParam(':id', $id);
