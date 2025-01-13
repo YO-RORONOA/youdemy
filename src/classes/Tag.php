@@ -22,9 +22,9 @@ class Tag {
         return $stmt->execute();
     }
 
-    public static function getAllTags($db) {
+    public function getAllTags() {
         $query = "SELECT * FROM tags";
-        $stmt = $db->prepare($query);
+        $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
