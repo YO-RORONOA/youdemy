@@ -15,6 +15,7 @@ $tags = $tagcontroller->getAllTags();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +26,7 @@ $tags = $tagcontroller->getAllTags();
 
 
 </head>
+
 <body>
     <div class="container my-5">
         <div class="card shadow-lg">
@@ -62,13 +64,15 @@ $tags = $tagcontroller->getAllTags();
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group overflow-scrol" >
                         <label for="tags">Tags</label>
-                        <select class="form-multi-select" multiple data-coreui-search="true">
-                        <?php foreach ($tags as $tag): ?>
-                                <option value="<?= $tag['id'] ?>"><?= $tag['name'] ?></option>
-                            <?php endforeach; ?>                      
-                          </select>
+                        <div id="tags" class="checkbox-group overflow-scrol">
+                            <?php foreach ($tags as $tag): ?>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" value="<?= $tag['id'] ?>"><?= $tag['name'] ?> </input>
+                                </label>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="wallpaperUrl">Wallpaper URL</label>
@@ -94,4 +98,5 @@ $tags = $tagcontroller->getAllTags();
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
