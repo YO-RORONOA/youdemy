@@ -37,11 +37,11 @@ $tags = $tagcontroller->getAllTags();
                 <form method="POST" action="../../controllers/teachercontroller/CourseController.php" id="createCourseForm">
                     <div class="form-group">
                         <label for="courseTitle">Course Title</label>
-                        <input type="text" class="form-control" id="courseTitle" name="courseTitle" placeholder="Enter course title" required>
+                        <input type="text" class="form-control" id="courseTitle" name="title" placeholder="Enter course title" required>
                     </div>
                     <div class="form-group">
                         <label for="courseDescription">Course Description</label>
-                        <textarea class="form-control" id="courseDescription" name="courseDescription" rows="4" placeholder="Enter course description" required></textarea>
+                        <textarea class="form-control" id="courseDescription" name="description" rows="4" placeholder="Enter course description" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="contentType">Content Type</label>
@@ -69,7 +69,7 @@ $tags = $tagcontroller->getAllTags();
                         <div id="tags" class="checkbox-group overflow-scrol">
                             <?php foreach ($tags as $tag): ?>
                                 <label class="checkbox-label">
-                                    <input type="checkbox" value="<?= $tag['id'] ?>"><?= $tag['name'] ?> </input>
+                                    <input name="tags[]" type="checkbox" value="<?= $tag['id'] ?>"><?= $tag['name'] ?> </input>
                                 </label>
                             <?php endforeach; ?>
                         </div>

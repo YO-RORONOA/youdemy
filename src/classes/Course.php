@@ -40,7 +40,7 @@ class Course
 
     public function createCourse()
     {
-        $query = "INSERT into course(title, description, content, teacher_id, categorie_id, wallpaper_url, content_type, video_hours, nb_articles, nb_resources)
+        $query = "INSERT into course(title, description, content, teacher_id, category_id, wallpaper_url, content_type, video_hours, nb_articles, nb_resources)
         values(:title, :description, :content, :teacher_id, :categorie_id, :wallpaper_url, :content_type, :video_hours, :nb_articles, :nb_resources)";
         $stmt= $this->db->prepare($query);
         $stmt->bindParam(':title', $this->title);
