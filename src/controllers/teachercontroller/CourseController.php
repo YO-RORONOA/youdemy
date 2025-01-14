@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../classes/Course.php';
+require_once __DIR__ . '/../../classes/Course_Tags.php';
+
 session_start();
 
 if(isset($_SESSION['user_id']))
@@ -10,22 +12,24 @@ if(isset($_SESSION['user_id']))
     $user_role = $_SESSION['user_role'];
 
 }
-echo  $user_id ;
 
 
 
 class CourseController
 {
 
-    protected $db;
-    protected $course;
-    protected $error_message = [];
+    private $db;
+    private $course;
+    private $course_tags;
+    private $error_message = [];
 
     public function __construct()
     {
         $database = new Database;
         $this->db = $database->connect();
         $this->course = new Course($this->db);
+        $this->course_tags = new CourseTag($this->db);
+
     }
 
 
@@ -55,6 +59,19 @@ class CourseController
     }
 
 
+    public function createCoursTags($courseid, $tagid)
+    {
+     $this->course_tags->setAttributes($courseid, $tagid);
+     return $this->course_tags->addTagToCourse();
+     
+    }
+
+    public function lastInsertedID()
+    {
+        $lastid = $this->db->lastInsertId();
+        return $lastid;
+    }
+
 
 
 
@@ -74,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $title = $_POST['title'];
     $description = $_POST['description'];
-    $tags = $_POST['tags']; 
+    $tagsId = $_POST['tags']; 
     $content = $_POST['contentUrl'];
     $teacherId = $user_id;
     $categoryId = $_POST['category'];
@@ -88,6 +105,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $controller->createCourse($title, $description, $content, $teacherId, $categoryId, $wallpaper,  $content_type,
      $video_hours, $nb_articles, $nb_resources);
+
+
+     $courseId = $controller->lastInsertedID();
+     echo `last insert id ${courseId}`;
+     var_dump ($tagsId);
+
+
+
+     $controller->createCoursTags($courseId, $tagsId);
+     
 
 }
 

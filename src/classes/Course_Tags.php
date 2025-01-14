@@ -3,7 +3,7 @@
 
 class CourseTag {
     private $courseId;
-    private $tagId;
+    private $tags;
     private $db;
 
     public function __construct($db) {
@@ -13,16 +13,27 @@ class CourseTag {
     public function setAttributes($courseid, $tagid)
     {
         $this->courseId = $courseid;
-        $this->tagId = $tagid;
+        $this->tags = $tagid;
     }
 
-    public function addTagToCourse() {
-        $query = "INSERT INTO course_tags (course_id, tag_id) VALUES (:courseId, :tagId)";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':courseId', $this->courseId);
-        $stmt->bindParam(':tagId', $this->tagId);
-        return $stmt->execute();
+    public function addTagToCourse()
+    {
+        $result = true;
+
+        foreach ($this->tags as $tagId) {
+            $query = "INSERT INTO course_tags (course_id, tag_id) VALUES (:courseId, :tagId)";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':courseId', $this->courseId);
+            $stmt->bindParam(':tagId', $tagId);
+            if (!$stmt->execute()) {
+                $result = false;
+                break;
+            }
+        }
+        return $result;
     }
+        
+    
 
     public function getTagsByCourse($db, $courseId) {
         $query = "SELECT tags.* FROM tags

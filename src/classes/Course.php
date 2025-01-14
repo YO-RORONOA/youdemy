@@ -2,7 +2,7 @@
 
 
 
-class Course
+abstract class Course
 {
     private $db;
     private $id;
@@ -38,24 +38,8 @@ class Course
         $this->nb_resources = $nb_resources;
     }
 
-    public function createCourse()
-    {
-        $query = "INSERT into course(title, description, content, teacher_id, category_id, wallpaper_url, content_type, video_hours, nb_articles, nb_resources)
-        values(:title, :description, :content, :teacher_id, :categorie_id, :wallpaper_url, :content_type, :video_hours, :nb_articles, :nb_resources)";
-        $stmt= $this->db->prepare($query);
-        $stmt->bindParam(':title', $this->title);
-        $stmt->bindParam(':description', $this->description);
-        $stmt->bindParam(':content', $this->content);
-        $stmt->bindParam(':teacher_id', $this->teacherId);
-        $stmt->bindParam(':categorie_id', $this->categoryId);
-        $stmt->bindParam(':wallpaper_url', $this->wallpaper);
-        $stmt->bindParam(':content_type', $this->content_type);
-        $stmt->bindParam(':video_hours', $this->video_hours);
-        $stmt->bindParam(':nb_articles', $this->nb_articles);
-        $stmt->bindParam(':nb_resources', $this->nb_resources);
-
-        return $stmt->execute();
-    }
+    abstract public function createCourse();
+    abstract public function fetchCourse();
 
     public function getAllcourses()
     {
@@ -91,6 +75,59 @@ public function deleteCourse($id) {
     $stmt->bindParam(':id', $id);
     return $stmt->execute();
 }
+
+
+
+
+public function getdb()
+    {
+        return $this->db;
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+    public function getDescription()
+    {
+        return $this->description;
+    }
+    public function getContent()
+    {
+        return $this->content;
+    }
+    public function getWallpaper()
+    {
+        return $this->wallpaper;
+    }
+    public function getTeacherId()
+    {
+        return $this->teacherId;
+    }
+    public function getCategoryId()
+    {
+        return $this->categoryId;
+    }
+    public function getTags()
+    {
+        return $this->tags;
+    }
+    public function getContentType()
+    {
+        return $this->content_type;
+    }
+    public function getVideoHours()
+    {
+        return $this->video_hours;
+    }
+    public function getNbArticles()
+    {
+        return $this->nb_articles;
+    }
+    public function getNbResources()
+    {
+        return $this->nb_resources;
+    }
 
 
 
