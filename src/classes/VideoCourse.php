@@ -1,25 +1,27 @@
 <?php
+
+require_once __DIR__ . '../../config/config.php';
+
 require_once 'Course.php';
 
-class VideoCourse extends Course
+class DocumentCourse extends Course
 {
-    private $video_hours;
 
     public function createCourse()
     {
         $query = "INSERT into course(title, description, content, teacher_id, category_id, wallpaper_url, content_type, video_hours, nb_articles, nb_resources)
         values(:title, :description, :content, :teacher_id, :categorie_id, :wallpaper_url, :content_type, :video_hours, :nb_articles, :nb_resources)";
-        $stmt= $this->db->prepare($query);
-        $stmt->bindParam(':title', $this->title);
-        $stmt->bindParam(':description', $this->description);
-        $stmt->bindParam(':content', $this->content);
-        $stmt->bindParam(':teacher_id', $this->teacherId);
-        $stmt->bindParam(':categorie_id', $this->categoryId);
-        $stmt->bindParam(':wallpaper_url', $this->wallpaper);
-        $stmt->bindParam(':content_type', $this->content_type);
-        $stmt->bindParam(':video_hours', $this->video_hours);
-        $stmt->bindParam(':nb_articles', $this->nb_articles);
-        $stmt->bindParam(':nb_resources', $this->nb_resources);
+        $stmt= $this->getdb()->prepare($query);
+        $stmt->bindParam(':title', $this->getTitle());
+        $stmt->bindParam(':description', $this->getDescription());
+        $stmt->bindParam(':content', $this->getContent());
+        $stmt->bindParam(':teacher_id', $this->getTeacherId());
+        $stmt->bindParam(':categorie_id', $this->getCategoryId());
+        $stmt->bindParam(':wallpaper_url', $this->getWallpaper());
+        $stmt->bindParam(':content_type', $this->getContentType());
+        $stmt->bindParam(':video_hours', $this->getVideoHours());
+        $stmt->bindParam(':nb_articles', $this->getNbArticles());
+        $stmt->bindParam(':nb_resources', $this->getNbResources());
 
         return $stmt->execute();
     }
@@ -30,15 +32,15 @@ class VideoCourse extends Course
       FROM Course
       LEFT JOIN Course_Tags ON Course.id = Course_Tags.course_id
       LEFT JOIN Tags ON Course_Tags.tag_id = Tags.id
-      WHERE Course.content_type = 'video'
+      WHERE Course.content_type = 'document'
       GROUP BY Course.id";
 
-        $stmt = $this->db->prepare($query);
+        $stmt = $this->getdb()->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
+       
 }
 
 ?>
