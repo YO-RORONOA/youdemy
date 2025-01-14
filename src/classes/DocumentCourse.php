@@ -6,6 +6,7 @@ require_once 'Course.php';
 
 class DocumentCourse extends Course
 {
+    
 
     public function createCourse()
     {
@@ -32,7 +33,7 @@ class DocumentCourse extends Course
       FROM Course
       LEFT JOIN Course_Tags ON Course.id = Course_Tags.course_id
       LEFT JOIN Tags ON Course_Tags.tag_id = Tags.id
-      WHERE Course.content_type = 'video'
+      WHERE Course.content_type = 'document'
       GROUP BY Course.id";
 
         $stmt = $this->getdb()->prepare($query);

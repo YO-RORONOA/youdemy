@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../classes/Course.php';
 require_once __DIR__ . '/../../classes/Course_Tags.php';
+require_once __DIR__ . '/../../classes/VideoCourse.php';
 
 session_start();
 
@@ -19,7 +20,6 @@ class CourseController
 {
 
     private $db;
-    private $course;
     private $course_tags;
     private $error_message = [];
 
@@ -27,23 +27,27 @@ class CourseController
     {
         $database = new Database;
         $this->db = $database->connect();
-        $this->course = new Course($this->db);
         $this->course_tags = new CourseTag($this->db);
-
     }
-
 
     public function createCourse($title, $description, $content, $teacherId, $categoryId, $wallpaper,  $content_type, $video_hours, $nb_articles, $nb_resources)
     {
-        $this->course->setAttributes($title, $description, $content, $teacherId, $categoryId, $wallpaper,  $content_type, $video_hours, $nb_articles, $nb_resources);
-        return $this->course->createCourse();
+        if ($content_type === 'video') {
+            $videocontroller = new VideoCourse($this->db, $title, $description, $content, $teacherId, $categoryId, $wallpaper, $content_type, $video_hours, $nb_articles, $nb_resources);
+            return $videocontroller->createCourse();
+        } elseif ($content_type === 'document') {
+            $documentcontroller = new DocumentCourse($this->db, $title, $description, $content, $teacherId, $categoryId, $wallpaper, $content_type, $video_hours, $nb_articles, $nb_resources);
+            return $documentcontroller->createCourse();
+        } else {
+            throw new Exception("Invalid content type");
+        }
     }
 
 
-    public function getAllCourses()
-    {
-        return $this->course->getAllcourses();
-    }
+    // public function getAllCourses()
+    // {
+    //     return $this->course->getAllcourses();
+    // }
 
 
 
@@ -108,12 +112,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
      $courseId = $controller->lastInsertedID();
-     echo `last insert id ${courseId}`;
-     var_dump ($tagsId);
-
-
 
      $controller->createCoursTags($courseId, $tagsId);
+
      
 
 }
