@@ -52,9 +52,9 @@ print_r($allcourses[3]['tag_ids']);
             <p class="card-text"><?= htmlspecialchars($course['description']) ?></p>
             <button class="btn btn-primary edit-btn" 
             
-            print
             
-            data-bs-toggle="modal" data-bs-target="#courseModal" data-id="<?= $course['id'] ?>">Modify Course</button>
+            
+            data-bs-toggle="modal" data-bs-target="#courseModal" onclick="loadData('<?= $course['id'] ?>')"  data-id="<?= $course['id'] ?>">Modify Course</button>
             <a href="#" class="btn btn-danger">Delete Course</a>
           </div>
           <div class="card-footer">
@@ -149,6 +149,7 @@ print_r($allcourses[3]['tag_ids']);
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../../assets/js/courseAjax.js" defer></script>
 </body>
 </html>
 

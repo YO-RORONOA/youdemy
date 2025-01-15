@@ -132,3 +132,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }
 
+
+
+if ($_GET['action'] == 'edit' && isset($_GET['id'])) {
+    $controller = new CourseController();
+
+    $id= $_GET['id'];
+    $course = $controller->fetchCourseById($courseId);
+    echo json_encode($course); 
+}
