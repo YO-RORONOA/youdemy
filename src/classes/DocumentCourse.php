@@ -27,7 +27,7 @@ class DocumentCourse extends Course
         return $stmt->execute();
     }
 
-    public function fetchCourse()
+    public static function fetchCourse($db)
     {
         $query = "SELECT Course.id, Course.title, Course.description, Course.content, GROUP_CONCAT(Tags.name) AS tag_names
       FROM Course
@@ -36,7 +36,7 @@ class DocumentCourse extends Course
       WHERE Course.content_type = 'document'
       GROUP BY Course.id";
 
-        $stmt = $this->getdb()->prepare($query);
+        $stmt = $db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

@@ -44,6 +44,19 @@ class CourseController
     }
 
 
+
+    public function fetchAllCourse($content_type)
+    {
+        if ($content_type === 'video') {
+            return  VideoCourse::fetchCourse($this->db);
+        } elseif ($content_type === 'document') {
+            return DocumentCourse::fetchCourse($this->db);
+        } else {
+            throw new Exception("Invalid content type");
+        }
+    }
+
+
     // public function getAllCourses()
     // {
     //     return $this->course->getAllcourses();
@@ -51,16 +64,16 @@ class CourseController
 
 
 
-    public function addTagsToCourse($courseId, $tagIds)
-    {
-        foreach ($tagIds as $tagId) {
-            $query = "INSERT INTO Course_Tags (course_id, tag_id) VALUES (:courseId, :tagId)";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':courseId', $courseId);
-            $stmt->bindParam(':tagId', $tagId);
-            $stmt->execute();
-        }
-    }
+    // public function bindTagsToCourse($courseId, $tagIds)
+    // {
+    //     foreach ($tagIds as $tagId) {
+    //         $query = "INSERT INTO Course_Tags (course_id, tag_id) VALUES (:courseId, :tagId)";
+    //         $stmt = $this->db->prepare($query);
+    //         $stmt->bindParam(':courseId', $courseId);
+    //         $stmt->bindParam(':tagId', $tagId);
+    //         $stmt->execute();
+    //     }
+    // }
 
 
     public function createCoursTags($courseid, $tagid)

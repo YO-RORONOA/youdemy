@@ -39,7 +39,7 @@ abstract class Course
     }
 
     abstract public function createCourse();
-    abstract public function fetchCourse();
+    abstract public static function fetchCourse($db);
 
     public function getAllcourses()
     {
