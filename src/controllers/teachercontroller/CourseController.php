@@ -93,7 +93,11 @@ class CourseController
 
 
 
+    public function fetchCourseById($id)
+    {
+        return  Course::fetchCoursebyId($this->db, $id);
 
+    }
 
 
 
@@ -134,10 +138,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-if ($_GET['action'] == 'edit' && isset($_GET['id'])) {
+if (isset($_GET['action']) == 'edit' && isset($_GET['id'])) {
     $controller = new CourseController();
 
     $id= $_GET['id'];
-    $course = $controller->fetchCourseById($courseId);
+
+    $course = $controller->fetchCourseById($id);
     echo json_encode($course); 
 }

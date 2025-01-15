@@ -78,14 +78,15 @@ class VideoCourse extends Course
 
     public static function fetchCoursebyId($db, $id)
     {
-        $query = "SELECT Course.id, Course.title, Course.description, 
-        Course.content, Course.wallpaper_url, 
-        Course.video_hours, Course.nb_articles,
+        $query = "SELECT Course.id, Course.title, Course.description, Course.content_type, 
+        Course.content, Course.wallpaper_url,
+        Course.video_hours, Course.nb_articles, categories.name,
         Course.nb_resources, GROUP_CONCAT(Tags.name) AS tag_names,
         GROUP_CONCAT(Tags.id) AS tag_ids
       FROM Course
       LEFT JOIN Course_Tags ON Course.id = Course_Tags.course_id
       LEFT JOIN Tags ON Course_Tags.tag_id = Tags.id
+      LEFT JOIN categories ON categories.id = Course.category_id
       WHERE Course.id = :id
       GROUP BY Course.id";
 
