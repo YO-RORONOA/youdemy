@@ -12,6 +12,7 @@ async function loadData(course) {
         const tagids = responseData.tag_ids.split(',');
         console.log(tagids)
 
+        document.getElementById('courseId').value = responseData.id;
         document.getElementById('courseTitle').value = responseData.title;
         document.getElementById('courseDescription').value = responseData.description;
         // document.getElementById('contentType').value = responseData.contentType;

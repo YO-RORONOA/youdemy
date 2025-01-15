@@ -107,7 +107,7 @@ class CourseController
 
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($_POST['courseId']) ) {
     $controller = new CourseController();
 
     $title = $_POST['title'];
@@ -132,9 +132,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
      $controller->createCoursTags($courseId, $tagsId);
 
-     
 
 }
+
+
+elseif (!empty($_POST['courseId']) && $_SERVER['REQUEST_METHOD'] === 'POST')
+{
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+    $tagsId = $_POST['tags']; 
+    $content = $_POST['contentUrl'];
+    $teacherId = $user_id;
+    $categoryId = $_POST['category'];
+    $wallpaper = $_POST['wallpaperUrl'];
+    $content_type = $_POST['contentType'];
+    $video_hours = $_POST['videoHours'];
+    $nb_articles = $_POST['articles'];
+    $nb_resources = $_POST['resources'];    
+}
+
+
+
+
+
+
+
+
 
 
 

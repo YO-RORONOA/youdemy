@@ -50,31 +50,38 @@ abstract class Course
     }
 
 
-    public function updateCourse($id)
-{
-    $query = "UPDATE course 
+    public static function updateCourse($db, $id, $title, $description, $tagsId, $content, $teacherId, $categoryId, $wallpaper, $content_type, $video_hours, $nb_articles, $nb_resources)
+    {
+        $query = "UPDATE course 
               SET title = :title, description = :description, content = :content, 
-                  categoryid = :categoryId, wallpaper_url = :wallpaper
+                  teacher_id = :teacher_id, categoryid = :categoryId, wallpaper_url = :wallpaper,
+                  content_type = :content_type, video_hours = :video_hours,
+                  nb_articles = :nb_articles, nb_resources = :nb_resources
               WHERE id = :id";
-    
-    $stmt = $this->db->prepare($query);
 
-    $stmt->bindParam(':title', $this->title);
-    $stmt->bindParam(':description', $this->description);
-    $stmt->bindParam(':content', $this->content);
-    $stmt->bindParam(':categoryId', $this->categoryId);
-    $stmt->bindParam(':wallpaper_url', $this->wallpaper);
-    $stmt->bindParam(':id', $id);
+        $stmt = $db->prepare($query);
 
-    return $stmt->execute();  
-}
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':content', $content);
+        $stmt->bindParam(':teacher_id', $teacherId);
+        $stmt->bindParam(':categoryId', $categoryId);
+        $stmt->bindParam(':wallpaper', $wallpaper);
+        $stmt->bindParam(':content_type', $content_type);
+        $stmt->bindParam(':video_hours', $video_hours);
+        $stmt->bindParam(':nb_articles', $nb_articles);
+        $stmt->bindParam(':nb_resources', $nb_resources);
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    }
 
-public function deleteCourse($id) {
-    $query = "DELETE FROM course WHERE id = :id";
-    $stmt = $this->db->prepare($query);
-    $stmt->bindParam(':id', $id);
-    return $stmt->execute();
-}
+    public function deleteCourse($id)
+    {
+        $query = "DELETE FROM course WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    }
 
 
 public static function fetchCoursebyId($db, $id)
