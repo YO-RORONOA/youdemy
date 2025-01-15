@@ -1,9 +1,33 @@
 <?php
 require '../../controllers/teachercontroller/courseController.php';
+require_once __DIR__ . '/../../controllers/categorieController.php';
+require_once __DIR__ . '/../../controllers/TagController.php';
+
+$controller = new CategorieController;
+$categories = $controller->getAllCategories();
+
+$tagcontroller = new TagController;
+$tags = $tagcontroller->getAllTags();
+
 
 $controller = new CourseController;
 $allcourses = $controller->fetchAllCourse('video');
-//print_r($allcourses);
+// var_dump($allcourses);
+
+// $test = array_column($allcourses['tag_names'], 'id');
+// echo $course['tag_ids']
+print_r($allcourses[3]['tag_ids']);
+
+// foreach ($allcourses as $key => $course) {
+
+  // $course["tag_names"]=  explode(',', $course["tag_names"]);
+  // $arr = array_map('trim', explode(',', $course["tag_names"]));
+  // ptint_r($arr;
+
+  // $course["tag_ids"]=  explode(',', $course["tag_ids"]);
+// }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +37,7 @@ $allcourses = $controller->fetchAllCourse('video');
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Course Listing - Udemy Style</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/styles/styles.css">
 </head>
 <body>
   <div class="container my-4">
@@ -25,7 +50,11 @@ $allcourses = $controller->fetchAllCourse('video');
           <div class="card-body">
             <h5 class="card-title"><?= htmlspecialchars($course['title']) ?></h5>
             <p class="card-text"><?= htmlspecialchars($course['description']) ?></p>
-            <button class="btn btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#courseModal" data-id="<?= $course['id'] ?>">Modify Course</button>
+            <button class="btn btn-primary edit-btn" 
+            
+            print
+            
+            data-bs-toggle="modal" data-bs-target="#courseModal" data-id="<?= $course['id'] ?>">Modify Course</button>
             <a href="#" class="btn btn-danger">Delete Course</a>
           </div>
           <div class="card-footer">
@@ -88,14 +117,30 @@ $allcourses = $controller->fetchAllCourse('video');
                 <?php endforeach; ?>
               </select>
             </div>
-            <div class="form-group">
+            <div class="form-group overflow-scrol">
               <label for="tags">Tags</label>
-              <div id="tags">
+              <div id="tags" class="checkbox-group overflow-scrol">
                 <?php foreach ($tags as $tag): ?>
-                  <label><input name="tags[]" type="checkbox" value="<?= $tag['id'] ?>"> <?= $tag['name'] ?> </label>
+                  <label class="checkbox-label"><input name="tags[]" type="checkbox" value="<?= $tag['id'] ?>"> <?= $tag['name'] ?> </label>
                 <?php endforeach; ?>
               </div>
             </div>
+            <div class="form-group">
+                        <label for="wallpaperUrl">Wallpaper URL</label>
+                        <input type="url" class="form-control" id="wallpaperUrl" name="wallpaperUrl" placeholder="Enter wallpaper URL">
+                    </div>
+                    <div class="form-group">
+                        <label for="videoHours">On-Demand Video Hours</label>
+                        <input type="number" class="form-control" id="videoHours" name="videoHours" placeholder="Enter hours of video" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="articles">Number of Articles</label>
+                        <input type="number" class="form-control" id="articles" name="articles" placeholder="Enter number of articles" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="resources">Downloadable Resources</label>
+                        <input type="number" class="form-control" id="resources" name="resources" placeholder="Enter number of resources" required>
+                    </div>
             <button type="submit" class="btn btn-primary">Save Course</button>
           </form>
         </div>
