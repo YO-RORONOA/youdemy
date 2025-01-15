@@ -99,7 +99,25 @@ class CourseController
 
     }
 
+    public function updateCourse($id, $title, $description, $tagsId, $content, $teacherId, $categoryId, $wallpaper, $content_type, $video_hours, $nb_articles, $nb_resources)
+    {
+        return Course::updateCourse($this->db, $id, $title, $description, $tagsId, $content, $teacherId, $categoryId, $wallpaper, $content_type, $video_hours, $nb_articles, $nb_resources);
+    }
 
+
+    public function deleteTagsFromAssTable($courseId)
+    {
+        $this->db->prepare("DELETE FROM Course_Tags WHERE course_id = ?")->execute([$courseId]);
+
+    }
+
+    public function insertTagsFromAssTable($tags, $courseId)
+    {
+        $stmt = $this->db->prepare("INSERT INTO Course_Tags (course_id, tag_id) VALUES (?, ?)");
+        foreach ($tags as $tagId) {
+            $stmt->execute([$courseId, $tagId]);
+        }
+    }
 
 }
 
@@ -138,6 +156,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($_POST['courseId']) ) {
 
 elseif (!empty($_POST['courseId']) && $_SERVER['REQUEST_METHOD'] === 'POST')
 {
+    $controller = new CourseController();
+
+    $courseId = $_POST['courseId'];
     $title = $_POST['title'];
     $description = $_POST['description'];
     $tagsId = $_POST['tags']; 
@@ -148,7 +169,12 @@ elseif (!empty($_POST['courseId']) && $_SERVER['REQUEST_METHOD'] === 'POST')
     $content_type = $_POST['contentType'];
     $video_hours = $_POST['videoHours'];
     $nb_articles = $_POST['articles'];
-    $nb_resources = $_POST['resources'];    
+    $nb_resources = $_POST['resources'];
+    
+
+    $controller->updateCourse($courseId, $title, $description, $tagsId, $content, $teacherId, $categoryId, $wallpaper, $content_type, $video_hours, $nb_articles, $nb_resources);
+    $controller->deleteTagsFromAssTable($courseId);
+    $controller->insertTagsFromAssTable($tagsId, $courseId);
 }
 
 

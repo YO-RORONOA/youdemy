@@ -54,7 +54,7 @@ abstract class Course
     {
         $query = "UPDATE course 
               SET title = :title, description = :description, content = :content, 
-                  teacher_id = :teacher_id, categoryid = :categoryId, wallpaper_url = :wallpaper,
+                  teacher_id = :teacher_id, category_id = :categoryId, wallpaper_url = :wallpaper,
                   content_type = :content_type, video_hours = :video_hours,
                   nb_articles = :nb_articles, nb_resources = :nb_resources
               WHERE id = :id";
