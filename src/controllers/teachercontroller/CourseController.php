@@ -4,6 +4,7 @@ require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../classes/Course.php';
 require_once __DIR__ . '/../../classes/Course_Tags.php';
 require_once __DIR__ . '/../../classes/VideoCourse.php';
+require_once __DIR__ . '/../../classes/DocumentCourse.php';
 
 session_start();
 
@@ -33,10 +34,10 @@ class CourseController
     public function createCourse($title, $description, $content, $teacherId, $categoryId, $wallpaper,  $content_type, $video_hours, $nb_articles, $nb_resources)
     {
         if ($content_type === 'video') {
-            $videocontroller = new VideoCourse($this->db, $title, $description, $content, $teacherId, $categoryId, $wallpaper, $content_type, $video_hours, $nb_articles, $nb_resources);
+            $videocontroller = new VideoCourse($this->db, $title, $description, $content, $teacherId, $categoryId, $wallpaper, 'video', $video_hours, $nb_articles, $nb_resources);
             return $videocontroller->createCourse();
         } elseif ($content_type === 'document') {
-            $documentcontroller = new DocumentCourse($this->db, $title, $description, $content, $teacherId, $categoryId, $wallpaper, $content_type, $video_hours, $nb_articles, $nb_resources);
+            $documentcontroller = new DocumentCourse($this->db, $title, $description, $content, $teacherId, $categoryId, $wallpaper, 'document', $video_hours, $nb_articles, $nb_resources);
             return $documentcontroller->createCourse();
         } else {
             throw new Exception("Invalid content type");

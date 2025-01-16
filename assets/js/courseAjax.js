@@ -24,10 +24,10 @@ async function loadData(course) {
         document.getElementById('resources').value = responseData.nb_resources;
 
 
-
+        console.log(responseData.content_type)
         const selectContenttype = document.getElementById('contentType');
         for (let option of selectContenttype.options) {
-            if (option.text === responseData.content_type) {
+            if (option.value === responseData.content_type) {
                 option.selected = true;
             } 
         }

@@ -6,6 +6,33 @@ require_once 'Course.php';
 
 class DocumentCourse extends Course
 {
+    public function __construct(
+        $db,
+        $title,
+        $description,
+        $content,
+        $teacherId,
+        $categoryId,
+        $wallpaper,
+        $content_type,
+        $video_hours,
+        $nb_articles,
+        $nb_resources
+    ) {
+        parent::__construct($db);
+        $this->setAttributes(
+            $title,
+            $description,
+            $content,
+            $teacherId,
+            $categoryId,
+            $wallpaper,
+            $content_type,
+            $video_hours,
+            $nb_articles,
+            $nb_resources
+        );
+    }
     
 
     public function createCourse()
@@ -13,16 +40,16 @@ class DocumentCourse extends Course
         $query = "INSERT into course(title, description, content, teacher_id, category_id, wallpaper_url, content_type, video_hours, nb_articles, nb_resources)
         values(:title, :description, :content, :teacher_id, :categorie_id, :wallpaper_url, :content_type, :video_hours, :nb_articles, :nb_resources)";
         $stmt= $this->getdb()->prepare($query);
-        $stmt->bindParam(':title', $this->getTitle());
-        $stmt->bindParam(':description', $this->getDescription());
-        $stmt->bindParam(':content', $this->getContent());
-        $stmt->bindParam(':teacher_id', $this->getTeacherId());
-        $stmt->bindParam(':categorie_id', $this->getCategoryId());
-        $stmt->bindParam(':wallpaper_url', $this->getWallpaper());
-        $stmt->bindParam(':content_type', $this->getContentType());
-        $stmt->bindParam(':video_hours', $this->getVideoHours());
-        $stmt->bindParam(':nb_articles', $this->getNbArticles());
-        $stmt->bindParam(':nb_resources', $this->getNbResources());
+        $stmt->bindvalue(':title', $this->getTitle());
+        $stmt->bindvalue(':description', $this->getDescription());
+        $stmt->bindvalue(':content', $this->getContent());
+        $stmt->bindvalue(':teacher_id', $this->getTeacherId());
+        $stmt->bindvalue(':categorie_id', $this->getCategoryId());
+        $stmt->bindvalue(':wallpaper_url', $this->getWallpaper());
+        $stmt->bindvalue(':content_type', $this->getContentType());
+        $stmt->bindvalue(':video_hours', $this->getVideoHours());
+        $stmt->bindvalue(':nb_articles', $this->getNbArticles());
+        $stmt->bindvalue(':nb_resources', $this->getNbResources());
 
         return $stmt->execute();
     }

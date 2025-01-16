@@ -4,7 +4,7 @@ require '../controllers/teachercontroller/courseController.php';
 
 $controller = new CourseController;
 $allcourses = $controller->fetchAllCourse('video');
-$course = $allcourses[4];
+$course = $allcourses[1];
 ?>
 
 <!DOCTYPE html>

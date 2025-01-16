@@ -5,26 +5,34 @@ require_once __DIR__ . '/../../controllers/TagController.php';
 
 $controller = new CategorieController;
 $categories = $controller->getAllCategories();
-
 $tagcontroller = new TagController;
 $tags = $tagcontroller->getAllTags();
 
 
+
 $controller = new CourseController;
-$allcourses = $controller->fetchAllCourse('video');
+$allcoursesV = $controller->fetchAllCourse('video');
+
+$allcoursesD = $controller->fetchAllCourse('document');
+
+
+$allcourses = array_merge($allcoursesV, $allcoursesD);
+
+shuffle($allcourses);
+
 // var_dump($allcourses);
 
 // $test = array_column($allcourses['tag_names'], 'id');
 // echo $course['tag_ids']
-print_r($allcourses[3]['tag_ids']);
+// print_r($allcourses);
 
 // foreach ($allcourses as $key => $course) {
 
-  // $course["tag_names"]=  explode(',', $course["tag_names"]);
-  // $arr = array_map('trim', explode(',', $course["tag_names"]));
-  // ptint_r($arr;
+//   $course["tag_names"]=  explode(',', $course["tag_names"]);
+//   $arr = array_map('trim', explode(',', $course["tag_names"]));
+//   ptint_r($arr;
 
-  // $course["tag_ids"]=  explode(',', $course["tag_ids"]);
+//   $course["tag_ids"]=  explode(',', $course["tag_ids"]);
 // }
 
 
@@ -46,7 +54,7 @@ print_r($allcourses[3]['tag_ids']);
       <?php foreach ($allcourses as $course): ?>
       <div class="col">
         <div class="card h-100">
-          <img src="<?= htmlspecialchars($course['wallpaper_url']) ?>" class="card-img-top" alt="Course Image">
+          <img src="../../../assets/pics/2020_05_software-development-i1.jpg" class="card-img-top" alt="Course Image">
           <div class="card-body">
             <h5 class="card-title"><?= htmlspecialchars($course['title']) ?></h5>
             <p class="card-text"><?= htmlspecialchars($course['description']) ?></p>
