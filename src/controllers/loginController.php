@@ -55,6 +55,7 @@ class LoginController
             $_SESSION['user_id'] = $userdata['id'];
             $_SESSION['user_role'] = $userdata['role'];
             $_SESSION['user_name'] = $userdata['name'];
+            $_SESSION['user_status'] = $userdata['name'];
 
             header('Location: ../views/dashboard.php');
             exit();

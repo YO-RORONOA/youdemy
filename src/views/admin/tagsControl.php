@@ -1,11 +1,23 @@
 <?php
+session_start();
+
 
 require_once __DIR__ . '/../../controllers/TagController.php';
 
 $controller = new TagController;
 $tags = $controller->getAllTags();
 $index = 1;
+
+
+if ($_SESSION['user_role'] != 'admin')
+{
+    $_SESSION['acess'] = 'access_denied';
+    header("Location: ../login.php");
+    exit();
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">

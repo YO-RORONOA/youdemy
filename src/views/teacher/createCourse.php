@@ -26,8 +26,66 @@ $tags = $tagcontroller->getAllTags();
 
 
 </head>
+<style>
 
+.navbar {
+            background-color: rgb(0, 128, 255);
+        }
+
+        .navbar .nav-link {
+            color: #fff;
+        }
+
+        .navbar .nav-link:hover {
+            background-color: rgb(28, 114, 194);
+            border-radius: 5px;
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .search-bar {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar .nav-link {
+                display: block;
+                margin: 5px 0;
+            }
+
+            .search-bar {
+                margin-top: 10px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
 <body>
+    <!-- Header with Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Course Panel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="./createCourse.php">Create Course</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./udemy.php">Manage Couses</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2 search-bar" type="search" placeholder="Search" aria-label="Search" />
+            </form>
+        </div>
+    </nav>
+    
     <div class="container my-5">
         <div class="card shadow-lg">
             <div class="card-header bg-primary text-white">

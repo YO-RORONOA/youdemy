@@ -1,6 +1,6 @@
 <?php
 
-require '../controllers/teachercontroller/courseController.php';
+require '../../controllers/teachercontroller/courseController.php';
 
 $controller = new CourseController;
 $allcourses = $controller->fetchAllCourse('video');
@@ -16,7 +16,7 @@ $course = $allcourses[1];
     <title><?php echo htmlspecialchars($course['title']); ?> - Youdemy</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@5.9.0/dist/css/coreui.min.css" rel="stylesheet">
-    <link href="../../assets/styles/styles.css" rel="stylesheet">
+    <link href="../../../assets/styles/styles.css" rel="stylesheet">
 </head>
 
 <body>

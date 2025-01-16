@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require '../../controllers/userController.php';
 
 $dashUser = new Usercontroller;
@@ -14,6 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo json_encode(['success' => $result]);
     exit;
 }
+
+// if ($_SESSION['user_role'] != 'admin')
+// {
+//     $_SESSION['acess'] = 'access_denied';
+//     header("Location: ../login.php");
+//     exit();
+// }
 
 ?>
 <!DOCTYPE html>

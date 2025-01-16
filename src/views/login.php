@@ -3,13 +3,26 @@ session_start();
 
 $errors = isset($_SESSION['text_error']) ? $_SESSION['text_error'] : [];
 unset($_SESSION['text_error']);
+
+$acess = isset($_SESSION['acess']) ? $_SESSION['acess'] : [];
+unset($_SESSION['acess']);
+
+
 ?>
 
 <?php if (!empty($errors)): ?>
     <div class="alert alert-danger">
         <?= implode('<br>', $errors); ?>
+
     </div>
 <?php endif; ?>
+<?php if (!empty($acess)): ?>
+    <div class="alert alert-danger">
+        <?= $acess; ?>
+
+    </div>
+<?php endif; ?>
+
 
 
 <!DOCTYPE html>
