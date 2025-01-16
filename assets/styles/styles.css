@@ -24,3 +24,150 @@
 .checkbox-label input[type="checkbox"] {
     margin-right: 8px;
 }
+
+
+
+
+.course-list li {
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
+    margin-bottom: 10px;
+    padding: 8px;
+}
+.course-list li::before {
+    content: '\2713';
+    color: green;
+    font-weight: bold;
+    margin-right: 8px;
+}
+.tag-btn {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    margin: 5px;
+    cursor: pointer;
+}
+.tags-container {
+    margin-top: 20px;
+}
+.card.my-4 {
+    max-width: 600px;
+    margin: auto;
+}
+iframe {
+    width: 80%;
+    height: 300px;
+    padding-left: 16%;
+}
+
+/* Side Panel Styles */
+.side-panel {
+    position: fixed;
+    top: 100px;
+    right: 50px;
+    width: 380px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    padding: 0;
+    height: auto;
+    max-height: 85vh;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+}
+
+.preview-video {
+    width: 100%;
+    height: 215px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border: none;
+    margin-bottom: 0;
+}
+
+.panel-content {
+    padding: 24px;
+}
+
+.panel-content h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #1a1a1a;
+}
+
+.price-tag {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 16px 0;
+}
+
+.subscription-info {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #2962ff, #3d5afe);
+    border: none;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 8px 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(41, 98, 255, 0.3);
+}
+
+.guarantee-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #e3f2fd;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 16px 0;
+}
+
+.guarantee-badge svg {
+    width: 24px;
+    height: 24px;
+    color: #2962ff;
+}
+
+.divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 20px 0;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+}
+
+.feature-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    color: #424242;
+}
+
+.feature-list li::before {
+    content: "✓";
+    color: #2962ff;
+    font-weight: bold;
+}
