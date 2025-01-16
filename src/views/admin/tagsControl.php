@@ -7,17 +7,87 @@ $tags = $controller->getAllTags();
 $index = 1;
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tags Management - Youdemy</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../assets/styles/sidebarAdmin.css" rel="stylesheet">
+    <style>
+        .navbar {
+            background-color: rgb(0, 128, 255);
+        }
+
+        .navbar .nav-link {
+            color: #fff;
+        }
+
+        .navbar .nav-link:hover {
+            background-color: rgb(28, 114, 194);
+            border-radius: 5px;
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .search-bar {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar .nav-link {
+                display: block;
+                margin: 5px 0;
+            }
+
+            .search-bar {
+                margin-top: 10px;
+                width: 100%;
+            }
+        }
+    </style>
 </head>
+
 <body>
+    <!-- Header with Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Admin Panel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="./dashboard.php">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./userControl.php">User Control</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="./tagsControl.php">Tag Control</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./categorieControl.php">Category Control</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Courses Control</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2 search-bar" type="search" placeholder="Search" aria-label="Search">
+            </form>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
     <div class="container my-5">
         <div class="card shadow-lg">
             <div class="card-header bg-primary text-white">
@@ -41,17 +111,16 @@ $index = 1;
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($tags as $tag):?>
-                        <tr>
-                            <td><?= $index++;?></td>
-                            <td><?= htmlspecialchars($tag['name']);?></td>
-                            <td>
-                                <a href="categorieManagement.php?id=<?=$tag['id'];?>" class="btn btn-primary btn-sm" data-bs-toggle="modal" onclick="loadData('Tagcontroller', '<?= $tag['id'] ?>')" 
-                                data-bs-target="#editTagModal" data-id="<?= $tag['id']; ?>">Modify</a>
+                        <?php foreach ($tags as $tag): ?>
+                            <tr>
+                                <td><?= $index++; ?></td>
+                                <td><?= htmlspecialchars($tag['name']); ?></td>
+                                <td>
+                                <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editTagModal" onclick="loadData('Tagcontroller', '<?= $tag['id'] ?>')">Modify</a>
                                 <a onclick="fetchdata('Tagcontroller', '<?= $tag['id'] ?>', 'tag')" class="btn btn-danger btn-sm tag-del" data-id="<?= $tag['id']; ?>">Delete</a>
-                            </td>
-                        </tr>
-                        <?php endforeach;?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
 
@@ -81,9 +150,11 @@ $index = 1;
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../../assets/js/usersAjax.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../../../assets/js/edit.js" defer></script>
     <script src="../../../assets/js/deletebutt.js" defer></script>
-
 </body>
+
 </html>

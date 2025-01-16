@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../controllers/categorieController.php';
+// include './nav.php';
 
 $controller = new CategorieController;
 $categories = $controller->getAllCategories();
@@ -16,50 +17,93 @@ $index = 1;
     <title>Categories Management - Youdemy</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../assets/styles/sidebarAdmin.css">
+    <style>
+        /* Adjust main content area */
+        main {
+            padding-top: 20px; 
+        }
+    </style>
 </head>
 <body>
-    <div class="container my-5">
-        <div class="card shadow-lg">
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0">Manage Categories</h4>
-            </div>
-            <div class="card-body">
-                <form action="../../controllers/CategorieController.php" method="POST" class="mb-4">
-                    <div class="mb-3">
-                        <label for="category_name" class="form-label">Category Name:</label>
-                        <input type="text" class="form-control" id="category_name" name="namecategorie" required>
-                    </div>
-                    <button type="submit" name="submit" class="btn btn-success">Add Category</button>
-                </form>
-
-                <table class="table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Category Name</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach($categories as $categorie):?>
-                        <tr>
-                            <td><?= $index++;?></td>
-                            <td><?= htmlspecialchars($categorie['name']);?></td>
-                            <td>
-                                <a href="categorieManagement.php?id=<?=$categorie['id'];?>" class="btn btn-primary btn-sm" data-bs-toggle="modal" onclick="loadCategoryData(this)" 
-                                data-bs-target="#editCategoryModal" data-id="<?= $categorie['id']; ?>">Modify</a>
-                                <a onclick= "fetchdata('Categoriecontroller', '<?= $categorie['id']; ?>', 'category')" class="btn btn-danger btn-sm suppression" data-id="<?= $categorie['id']; ?>">Delete</a>
-                            </td>
-                        </tr>
-                        <?php endforeach;?>
-                    </tbody>
-                </table>
-
-                <a href="dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
+    <!-- Start of the header (navigation bar) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Youdemy Admin</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.php">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./userControl.php">User Control</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./tagsControl.php">Tag Control</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./categorieControl.php">Category Control</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Courses Control</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Logout</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
+    </nav>
+    <!-- End of the header (navigation bar) -->
 
+    <main role="main" class="container">
+        <div class="container my-5">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Manage Categories</h4>
+                </div>
+                <div class="card-body">
+                    <form action="../../controllers/CategorieController.php" method="POST" class="mb-4">
+                        <div class="mb-3">
+                            <label for="category_name" class="form-label">Category Name:</label>
+                            <input type="text" class="form-control" id="category_name" name="namecategorie" required>
+                        </div>
+                        <button type="submit" name="submit" class="btn btn-success">Add Category</button>
+                    </form>
+
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Category Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($categories as $categorie):?>
+                            <tr>
+                                <td><?= $index++;?></td>
+                                <td><?= htmlspecialchars($categorie['name']);?></td>
+                                <td>
+                                    <a href="categorieManagement.php?id=<?=$categorie['id'];?>" class="btn btn-primary btn-sm" data-bs-toggle="modal" onclick="loadData('categorieController', '<?= $categorie['id'] ?>')"
+                                    data-bs-target="#editCategoryModal" data-id="<?= $categorie['id']; ?>">Modify</a>
+                                    <a onclick= "fetchdata('Categoriecontroller', '<?= $categorie['id']; ?>', 'category')" class="btn btn-danger btn-sm suppression" data-id="<?= $categorie['id']; ?>">Delete</a>
+                                </td>
+                            </tr>
+                            <?php endforeach;?>
+                        </tbody>
+                    </table>
+
+                    <a href="dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for editing category -->
     <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-md">
             <div class="modal-content">
@@ -82,7 +126,7 @@ $index = 1;
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../../assets/js/usersAjax.js" defer></script>
+    <script src="../../../assets/js/edit.js" defer></script>
     <script src="../../../assets/js/deletebutt.js" defer></script>
 
 </body>
