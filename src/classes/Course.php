@@ -75,11 +75,11 @@ abstract class Course
         return $stmt->execute();
     }
 
-    public function deleteCourse($id)
+    public static function deleteCourse($db, $id)
     {
         $query = "DELETE FROM course WHERE id = :id";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':id', $id);
+        $stmt = $db->prepare($query);
+        $stmt->bindValue(':id', $id);
         return $stmt->execute();
     }
 

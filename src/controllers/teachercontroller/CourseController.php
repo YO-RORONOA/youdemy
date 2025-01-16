@@ -107,7 +107,7 @@ class CourseController
 
     public function deleteTagsFromAssTable($courseId)
     {
-        $this->db->prepare("DELETE FROM Course_Tags WHERE course_id = ?")->execute([$courseId]);
+        return $this->db->prepare("DELETE FROM Course_Tags WHERE course_id = ?")->execute([$courseId]);
 
     }
 
@@ -119,13 +119,18 @@ class CourseController
         }
     }
 
+    public function deleteCourse($id)
+    {
+        return Course::deleteCourse($this->db, $id);
+    }
+
 }
 
 
 
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($_POST['courseId']) ) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' &&  empty($_POST['action']) && empty($_POST['courseId']) ) {
     $controller = new CourseController();
 
     $title = $_POST['title'];
@@ -195,3 +200,19 @@ if (isset($_GET['action']) == 'edit' && isset($_GET['id'])) {
     $course = $controller->fetchCourseById($id);
     echo json_encode($course); 
 }
+
+
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+    if ($_POST['action'] === 'delete') {
+        $controller = new CourseController();
+        $courseId = intval($_POST['id']);
+
+        if ($controller->deleteCourse($courseId) && $controller->deleteTagsFromAssTable($courseId)) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Failed to delete category.']);
+        }
+    } 
+} 

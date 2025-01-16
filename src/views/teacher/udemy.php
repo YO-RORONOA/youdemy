@@ -55,7 +55,7 @@ print_r($allcourses[3]['tag_ids']);
             
             
             data-bs-toggle="modal" data-bs-target="#courseModal" onclick="loadData('<?= $course['id'] ?>')"  data-id="<?= $course['id'] ?>">Modify Course</button>
-            <a href="#" class="btn btn-danger">Delete Course</a>
+            <a href="#" class="btn btn-danger" onclick="fetchdata('teachercontroller/CourseController', <?= $course['id'] ?>, 'course')">Delete Course</a>
           </div>
           <div class="card-footer">
             <small class="text-muted">4.5 (200 reviews)</small>
@@ -150,6 +150,8 @@ print_r($allcourses[3]['tag_ids']);
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../../../assets/js/courseAjax.js" defer></script>
+  <script src="../../../assets/js/deletebutt.js" defer></script>
+
 </body>
 </html>
 
