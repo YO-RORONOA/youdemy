@@ -67,7 +67,7 @@ $allcourses = $controller->fetchAllCourses();
     </nav>
 
     <div class="container my-4">
-        <h1 class="text-center mb-4">Your Courses</h1>
+        <h1 class="text-center mb-4">Available Courses</h1>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <?php foreach ($allcourses as $course): ?>
                 <div class="col">

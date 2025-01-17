@@ -9,7 +9,7 @@ require '../../controllers/student/Enrollment.php';
 $course;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['course_id'])) {
-    $_SESSION['course_id'] = $_POST['course_id']; 
+    $_SESSION['course_id'] = $_POST['course_id'];
     $controller = new CoursesController;
     $course = $controller->fetchCourseById($_SESSION['course_id']);
 }
@@ -158,18 +158,21 @@ if (isset($_SESSION['user_id'])) {
                     </div>
 
 
-                    <button id="enrollButton"
-                        class="btn btn-lg btn-block <?php echo $isEnrolled ? 'btn-danger' : 'btn-primary'; ?>"
-                        data-course-id="<?= htmlspecialchars($course['id']); ?>"
-                        <?= !isset($_SESSION['user_id']) ? 'disabled' : ''; ?>>
-                        <?php
-                        if (!isset($_SESSION['user_id'])) {
-                            echo 'Please Login to Subscribe';
-                        } else {
-                            echo $isEnrolled ? 'Unsubscribe from Course' : 'Subscribe to Course';
-                        }
-                        ?>
-                    </button>
+                    <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'student'): ?>
+                        <button id="enrollButton"
+                            class="btn btn-lg btn-block <?php echo $isEnrolled ? 'btn-danger' : 'btn-primary'; ?>"
+                            data-course-id="<?= htmlspecialchars($course['id']); ?>">
+                            <?php echo $isEnrolled ? 'Unsubscribe from Course' : 'Subscribe to Course'; ?>
+                        </button>
+                    <?php elseif (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'teacher'): ?>
+                        <div class="alert alert-info">
+                            Teacher accounts cannot subscribe to courses
+                        </div>
+                    <?php else: ?>
+                        <button class="btn btn-lg btn-block btn-primary" disabled>
+                            Please Login to Subscribe
+                        </button>
+                    <?php endif; ?>
 
 
                     <small class="d-block text-center text-muted mt-2">Starting at $10.00 per month after trial</small>
@@ -203,4 +206,3 @@ if (isset($_SESSION['user_id'])) {
 </body>
 
 </html>
-
