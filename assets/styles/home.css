@@ -1,0 +1,117 @@
+.hero-section {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    color: white;
+    padding: 100px 0;
+    margin-top: -1rem;
+}
+
+.stats-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+}
+
+.course-card {
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+}
+
+.category-card {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover {
+    background: #2c3e50;
+    color: white;
+}
+
+.teacher-card {
+    text-align: center;
+}
+
+.teacher-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.tag {
+    background: #e9ecef;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background: #2c3e50;
+    color: white;
+}
+
+
+.footer {
+    background: #2c3e50;
+    color: white;
+    padding: 4rem 0 2rem;
+}
+
+.footer h5 {
+    color: white;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.social-links a {
+    color: white;
+    margin-right: 1rem;
+    font-size: 1.2rem;
+    transition: opacity 0.3s ease;
+}
+
+.social-links a:hover {
+    opacity: 0.8;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    margin-top: 3rem;
+}

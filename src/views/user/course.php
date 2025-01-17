@@ -6,7 +6,13 @@ require '../../controllers/student/Enrollment.php';
 // $controller = new CourseController;
 // $allcourses = $controller->fetchAllCourse('video');
 // $course = $allcourses[1];
-$course;
+$course = null;
+
+//to avoid lost data when refreshed
+if (isset($_SESSION['course_id'])) {
+    $controller = new CoursesController;
+    $course = $controller->fetchCourseById($_SESSION['course_id']);
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['course_id'])) {
     $_SESSION['course_id'] = $_POST['course_id'];
