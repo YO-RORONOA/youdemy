@@ -61,7 +61,7 @@ if ($_SESSION['user_role'] != 'admin')
                         <a class="nav-link" href="#">Courses Control</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                        <a class="nav-link" href="../../controllers/auth/logout.php">Logout</a>
                     </li>
                 </ul>
             </div>

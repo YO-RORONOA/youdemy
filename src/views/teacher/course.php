@@ -56,11 +56,11 @@ $course = $allcourses[1];
                 <div class="navbar-nav ml-auto">
                     <?php if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'student'): ?>
                         <!-- Logged in state -->
-                        <a class="btn btn-outline-danger" href="logout.php">Logout</a>
+                        <a class="btn btn-outline-danger" href="../../controllers/auth/logout.php">Logout</a>
                     <?php else: ?>
                         <!-- Logged out state -->
-                        <a class="nav-link" href="../login.php">Login</a>
-                        <a class="btn btn-primary" href="../register.php">Register</a>
+                        <a class="nav-link" href="../auth/login.php">Login</a>
+                        <a class="btn btn-primary" href="../auth/register.php">Register</a>
                     <?php endif; ?>
                 </div>
             </div>

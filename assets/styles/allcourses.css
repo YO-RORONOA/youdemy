@@ -1,0 +1,50 @@
+body
+{
+    padding-top: 4rem;
+}
+.navbar {
+    padding: 0.5rem 1rem;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.search-form {
+    flex-grow: 1;
+    max-width: 400px;
+    margin: 0 1rem;
+}
+
+.search-form .input-group {
+    width: 100%;
+}
+
+.nav-link {
+    color: #2c3e50;
+    padding: 0.5rem 1rem;
+}
+
+@media (max-width: 991px) {
+    .search-form {
+        margin: 1rem 0;
+        max-width: 100%;
+    }
+    
+    .navbar-collapse {
+        background: white;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+}
+
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+

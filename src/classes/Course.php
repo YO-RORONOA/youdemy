@@ -41,10 +41,10 @@ abstract class Course
     abstract public function createCourse();
     abstract public static function fetchCourse($db);
 
-    public function getAllcourses()
+    public static function getAllcourses($db)
     {
         $query = "SELECT * from course";
-        $stmt = $this->db->prepare($query);
+        $stmt = $db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
