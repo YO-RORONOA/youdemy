@@ -77,7 +77,7 @@ $tags = $tagcontroller->getAllTags();
                     <a class="nav-link active" href="./createCourse.php">Create Course</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./udemy.php">Manage Couses</a>
+                    <a class="nav-link" href="./displaycourse.php">Manage Couses</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -85,7 +85,7 @@ $tags = $tagcontroller->getAllTags();
             </form>
         </div>
     </nav>
-    
+
     <div class="container my-5">
         <div class="card shadow-lg">
             <div class="card-header bg-primary text-white">

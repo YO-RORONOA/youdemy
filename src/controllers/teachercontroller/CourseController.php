@@ -57,6 +57,12 @@ class CourseController
         }
     }
 
+    public function fetchcourseByTeacher($teacher_id)
+    {
+        return  Course::getCoursesByTeacher($teacher_id, $this->db);
+
+    }
+
 
     // public function getAllCourses()
     // {
@@ -217,3 +223,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         }
     } 
 } 
+
+
+
+

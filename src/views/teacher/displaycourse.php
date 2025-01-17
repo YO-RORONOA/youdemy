@@ -3,22 +3,38 @@ require '../../controllers/teachercontroller/courseController.php';
 require_once __DIR__ . '/../../controllers/categorieController.php';
 require_once __DIR__ . '/../../controllers/TagController.php';
 
-$controller = new CategorieController;
-$categories = $controller->getAllCategories();
-$tagcontroller = new TagController;
-$tags = $tagcontroller->getAllTags();
+// $controller = new CategorieController;
+// $categories = $controller->getAllCategories();
+// $tagcontroller = new TagController;
+// $tags = $tagcontroller->getAllTags();
 
 
 
-$controller = new CourseController;
-$allcoursesV = $controller->fetchAllCourse('video');
+// $controller = new CourseController;
+// $allcoursesV = $controller->fetchAllCourse('video');
 
-$allcoursesD = $controller->fetchAllCourse('document');
+// $allcoursesD = $controller->fetchAllCourse('document');
 
 
-$allcourses = array_merge($allcoursesV, $allcoursesD);
+// $allcourses = array_merge($allcoursesV, $allcoursesD);
 
-shuffle($allcourses);
+// shuffle($allcourses);
+
+
+
+if($_SESSION['user_role'] == 'teacher' && isset($_SESSION['user_id']))
+{
+    $teacher_id = $_SESSION['user_id'];
+    $controller = new CourseController();
+    $allcourses = $controller->fetchcourseByTeacher($teacher_id);
+}
+
+
+
+
+
+
+
 
 // var_dump($allcourses);
 
@@ -96,7 +112,7 @@ shuffle($allcourses);
                     <a class="nav-link active" href="./createCourse.php">Create Course</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./udemy.php">Manage Couses</a>
+                    <a class="nav-link" href="./displaycourse.php">Manage Couses</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">

@@ -104,6 +104,14 @@ public static function fetchCoursebyId($db, $id)
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public static function getCoursesByTeacher($teacher_id, $db) {
+        $query = "SELECT * FROM course WHERE teacher_id = :teacher_id";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':teacher_id', $teacher_id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
 
 public function getdb()
