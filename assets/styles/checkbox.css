@@ -1,4 +1,4 @@
-.sidebar {
+/* .sidebar {
     position: fixed;
     height: 100vh;
     background-color:rgb(0, 128, 255);
@@ -19,7 +19,7 @@
 
 .sidebar .active {
     background-color:rgb(29, 86, 186);
-}
+} */
 
 .checkbox-group {
     display: flex;

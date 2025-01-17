@@ -57,14 +57,14 @@ class LoginController
             $_SESSION['user_name'] = $userdata['name'];
             $_SESSION['user_status'] = $userdata['name'];
 
-            header('Location: ../views/dashboard.php');
+            header('Location: ../views/user/allcourses.php');
             exit();
         }
     }
 
     public function redirectlogin()
     {
-        header('Location: ../views/login.php');
+        header('Location: ../views/auth/login.php');
         exit();
     }
 }

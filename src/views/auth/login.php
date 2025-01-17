@@ -32,7 +32,7 @@ unset($_SESSION['acess']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Bootstrap Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../assets/styles/login.css">
+    <link rel="stylesheet" href="../../../assets/styles/login.css">
 
 </head>
 <body class="bg-light">
@@ -40,12 +40,12 @@ unset($_SESSION['acess']);
         <div class="card card-custom shadow-lg w-100">
             <div class="row g-0 h-100">
                 <div class="col-md-6">
-                    <img src="../../assets/pics/login-office.jpeg" class="img-fluid rounded-start img-cover" alt="Office">
+                    <img src="../../../assets/pics/login-office.jpeg" class="img-fluid rounded-start img-cover" alt="Office">
                 </div>
                 <div class="col-md-6 d-flex align-items-center">
                     <div class="card-body">
                         <h1 class="card-title text-center mb-4">Login</h1>
-                        <form method="POST" action="../controllers/loginController.php">
+                        <form method="POST" action="../../controllers/loginController.php">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input name="email" type="email" class="form-control" id="email" placeholder="Jane Doe">

@@ -4,8 +4,6 @@ require_once __DIR__ . '/../../classes/course.php';
 
 
 
-
-
 class CoursesController
 {
     private $db;
@@ -23,4 +21,14 @@ class CoursesController
     {
         return Course::getAllcourses($this->db);
     }
+
+
+    public function fetchCourseByid($id)
+    {
+        return Course::fetchCoursebyId($this->db, $id);
+    }
+
 }
+
+
+

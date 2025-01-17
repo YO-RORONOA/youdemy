@@ -1,13 +1,31 @@
 <?php
+session_start();
+require '../../controllers/student/coursesController.php';
+require '../../controllers/student/Enrollment.php';
 
-require '../../controllers/teachercontroller/courseController.php';
+// $controller = new CourseController;
+// $allcourses = $controller->fetchAllCourse('video');
+// $course = $allcourses[1];
+$course;
 
-$controller = new CourseController;
-$allcourses = $controller->fetchAllCourse('video');
-$course = $allcourses[1];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['course_id'])) {
+    $_SESSION['course_id'] = $_POST['course_id']; 
+    $controller = new CoursesController;
+    $course = $controller->fetchCourseById($_SESSION['course_id']);
+}
+
+$enrollmentController = new EnrollmentController();
+$isEnrolled = false;
+if (isset($_SESSION['user_id'])) {
+    $isEnrolled = $enrollmentController->isEnrolled($_SESSION['user_id'], $course['id']);
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,11 +43,11 @@ $course = $allcourses[1];
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">Youdemy</a>
-            
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarContent">
                 <form class="search-form">
                     <div class="input-group">
@@ -41,20 +59,20 @@ $course = $allcourses[1];
                         </div>
                     </div>
                 </form>
-                
+
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Courses</a>
                     </li>
-                    <?php if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'student'): ?>
+                    <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'student'): ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Your Courses</a>
                         </li>
                     <?php endif; ?>
                 </ul>
-                
+
                 <div class="navbar-nav ml-auto">
-                    <?php if(isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'student'): ?>
+                    <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'student'): ?>
                         <!-- Logged in state -->
                         <a class="btn btn-outline-danger" href="../../controllers/auth/logout.php">Logout</a>
                     <?php else: ?>
@@ -72,7 +90,7 @@ $course = $allcourses[1];
     <div class="course-header">
         <div class="container">
             <h2><?php echo htmlspecialchars($course['title']); ?></h2>
-            
+
             <!-- Mobile-first pricing section -->
             <div class="pricing-card d-md-none">
                 <div class="price-tag">$10.00<span class="text-muted" style="font-size: 1rem;"> /month</span></div>
@@ -86,7 +104,7 @@ $course = $allcourses[1];
         <div class="row">
             <div class="col-md-8">
                 <div class="video-container my-4">
-                    <iframe src="<?php echo htmlspecialchars($course['content']); ?>" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/watch?v=LqYIKYEnX7Y&list=RDLqYIKYEnX7Y&start_radio=1" allowfullscreen></iframe>
                 </div>
 
                 <div class="card my-4">
@@ -133,13 +151,27 @@ $course = $allcourses[1];
             <div class="col-md-4 d-none d-md-block">
                 <div class="pricing-card sticky-top" style="top: 76px;"> <!-- Adjusted for navbar height -->
                     <div class="price-tag">$10.00<span class="text-muted" style="font-size: 1rem;"> /month</span></div>
-                    
+
                     <div class="subscription-info">
                         <h3>Subscribe to Youdemy's top courses</h3>
                         <p>Get unlimited access to 12,000+ of our top-rated courses</p>
                     </div>
 
-                    <button class="btn btn-primary btn-lg btn-block">Start Your Free Trial</button>
+
+                    <button id="enrollButton"
+                        class="btn btn-lg btn-block <?php echo $isEnrolled ? 'btn-danger' : 'btn-primary'; ?>"
+                        data-course-id="<?= htmlspecialchars($course['id']); ?>"
+                        <?= !isset($_SESSION['user_id']) ? 'disabled' : ''; ?>>
+                        <?php
+                        if (!isset($_SESSION['user_id'])) {
+                            echo 'Please Login to Subscribe';
+                        } else {
+                            echo $isEnrolled ? 'Unsubscribe from Course' : 'Subscribe to Course';
+                        }
+                        ?>
+                    </button>
+
+
                     <small class="d-block text-center text-muted mt-2">Starting at $10.00 per month after trial</small>
 
                     <hr>
@@ -167,5 +199,8 @@ $course = $allcourses[1];
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../../../assets/js/Enrollment.js"></script>
 </body>
+
 </html>
+

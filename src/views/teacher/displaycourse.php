@@ -3,10 +3,10 @@ require '../../controllers/teachercontroller/courseController.php';
 require_once __DIR__ . '/../../controllers/categorieController.php';
 require_once __DIR__ . '/../../controllers/TagController.php';
 
-// $controller = new CategorieController;
-// $categories = $controller->getAllCategories();
-// $tagcontroller = new TagController;
-// $tags = $tagcontroller->getAllTags();
+$controller = new CategorieController;
+$categories = $controller->getAllCategories();
+$tagcontroller = new TagController;
+$tags = $tagcontroller->getAllTags();
 
 
 
