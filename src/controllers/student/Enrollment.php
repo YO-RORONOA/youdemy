@@ -51,14 +51,17 @@ class EnrollmentController {
 
 
 
-if (!isset($_SESSION['user_id'])) {
-    http_response_code(401);
-    echo json_encode(['error' => 'User not logged in']);
-    exit;
-}
+// if (!isset($_SESSION['user_id'])) {
+//     http_response_code(401);
+//     echo json_encode(['error' => 'User not logged in']);
+//     exit;
+// }
 
 $enrollmentController = new EnrollmentController();
+if(isset($_SESSION['user_id']))
+{
 $userId = $_SESSION['user_id'];
+}
 $courseId = $_POST['course_id'] ?? null;
 $action = $_POST['action'] ?? null;
 

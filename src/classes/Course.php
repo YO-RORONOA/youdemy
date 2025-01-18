@@ -43,7 +43,21 @@ abstract class Course
 
     public static function getAllcourses($db)
     {
-        $query = "SELECT * from course";
+        $query = "SELECT 
+        Course.id AS course_id,
+        Course.title,
+        Course.description,
+        Course.content_type,
+        Course.content,
+        Course.wallpaper_url,
+        Course.video_hours,
+        Course.nb_articles,
+        Course.nb_resources,
+        Course.teacher_id,
+        categories.id AS category_id,
+        categories.name AS category_name
+    FROM Course
+    LEFT JOIN categories ON categories.id = Course.category_id";
         $stmt = $db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

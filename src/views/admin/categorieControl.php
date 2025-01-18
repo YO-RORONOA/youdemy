@@ -27,6 +27,7 @@ $index = 1;
     <title>Categories Management - Youdemy</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../../../assets/styles/sidebarAdmin.css">
     <style>
         /* Adjust main content area */
@@ -39,34 +40,50 @@ $index = 1;
     <!-- Start of the header (navigation bar) -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Youdemy Admin</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-mortarboard-fill me-2"></i>
+                Youdemy Admin
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="dashboard.php">Dashboard</a>
+                        <a class="nav-link active" href="dashboard.php">
+                            <i class="bi bi-speedometer2 me-1"></i> Dashboard
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./userControl.php">User Control</a>
+                        <a class="nav-link" href="./userControl.php">
+                            <i class="bi bi-people me-1"></i> Users
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./tagsControl.php">Tag Control</a>
+                        <a class="nav-link" href="./tagsControl.php">
+                            <i class="bi bi-tags me-1"></i> Tags
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./categorieControl.php">Category Control</a>
+                        <a class="nav-link" href="./categorieControl.php">
+                            <i class="bi bi-grid me-1"></i> Categories
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Courses Control</a>
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-collection-play me-1"></i> Courses
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../../controllers/auth/logout.php">Logout</a>
+                        <a class="nav-link" href="../../controllers/auth/logout.php">
+                            <i class="bi bi-box-arrow-right me-1"></i> Logout
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
     <!-- End of the header (navigation bar) -->
 
     <main role="main" class="container">

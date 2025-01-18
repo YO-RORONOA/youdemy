@@ -32,7 +32,6 @@ $allcourses = $controller->fetchAllCourses();
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarContent">
                 <form class="search-form">
                     <div class="input-group">
@@ -69,26 +68,32 @@ $allcourses = $controller->fetchAllCourses();
     <div class="container my-4">
         <h1 class="text-center mb-4">Available Courses</h1>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <?php foreach ($allcourses as $course): ?>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="<?= htmlspecialchars($course['wallpaper_url']) ?>" class="card-img-top" alt="Course Image">
-                        <div class="card-body">
-                            <h5 class="card-title"><?= htmlspecialchars($course['title']) ?></h5>
-                            <p class="card-text"><?= htmlspecialchars($course['description']) ?></p>
-                            <button class="btn btn-primary subscribe-btn" data-id="<?= $course['id'] ?>">Subscribe to Course</button>
-                            <form action="./course.php" method="POST" style="display:inline;">
-                                <input type="hidden" name="course_id" value="<?= $course['id'] ?>">
-                                <button type="submit" class="btn btn-outline-primary check-course-btn">Check Course</button>
-                            </form>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">4.5 (200 reviews)</small>
-                        </div>
+    <?php foreach ($allcourses as $course): ?>
+        <div class="col mb-4">
+            <div class="card">
+                <img src="<?= htmlspecialchars($course['wallpaper_url']) ?>" class="card-img-top" alt="Course Image">
+                <div class="card-body">
+                    <h5 class="card-title"><?= htmlspecialchars($course['title']) ?></h5>
+                    <span class="card-category">
+                        <i class="fas fa-folder me-1"></i>
+                        <?= htmlspecialchars($course['name'] ?? 'Uncategorized') ?>
+                    </span>
+                    <p class="card-description"><?= htmlspecialchars($course['description']) ?></p>
+                    <div class="card-actions">
+                        <button class="btn btn-primary subscribe-btn mb-2 w-100" data-id="<?= $course['course_id'] ?>">Subscribe to Course</button>
+                        <form action="./course.php" method="POST">
+                            <input type="hidden" name="course_id" value="<?= $course['course_id'] ?>">
+                            <a href="./course.php?id=<?= $course['course_id'] ?>" type="submit" class="btn btn-outline-primary check-course-btn w-100">Check Course</a>
+                        </form>
                     </div>
                 </div>
-            <?php endforeach; ?>
+                <div class="card-footer">
+                    <small class="text-muted">4.5 (200 reviews)</small>
+                </div>
+            </div>
         </div>
+    <?php endforeach; ?>
+</div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

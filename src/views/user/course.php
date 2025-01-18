@@ -9,15 +9,21 @@ require '../../controllers/student/Enrollment.php';
 $course = null;
 
 //to avoid lost data when refreshed
-if (isset($_SESSION['course_id'])) {
-    $controller = new CoursesController;
-    $course = $controller->fetchCourseById($_SESSION['course_id']);
-}
+// if (isset($_SESSION['course_id'])) {
+//     $controller = new CoursesController;
+//     $course = $controller->fetchCourseById($_SESSION['course_id']);
+// }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['course_id'])) {
-    $_SESSION['course_id'] = $_POST['course_id'];
+// if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['course_id'])) {
+//     $_SESSION['course_id'] = intval($_POST['course_id']);
+//     $controller = new CoursesController;
+//     $course = $controller->fetchCourseByid($_SESSION['course_id']);
+  
+// }
+if (isset($_GET['id'])) {
+    $_SESSION['course_id'] = $_GET['id'];
     $controller = new CoursesController;
-    $course = $controller->fetchCourseById($_SESSION['course_id']);
+    $course = $controller->fetchCourseByid($_SESSION['course_id']);
 }
 
 $enrollmentController = new EnrollmentController();
@@ -44,7 +50,7 @@ if (isset($_SESSION['user_id'])) {
 
 </head>
 
-<body>
+
     <!-- Navigation Header -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
@@ -209,6 +215,8 @@ if (isset($_SESSION['user_id'])) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="../../../assets/js/Enrollment.js"></script>
+
+
 </body>
 
 </html>

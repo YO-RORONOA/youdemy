@@ -56,7 +56,12 @@ class LoginController
             $_SESSION['user_role'] = $userdata['role'];
             $_SESSION['user_name'] = $userdata['name'];
             $_SESSION['user_status'] = $userdata['name'];
+            if($userdata['role'] == 'teacher')
+            {
+            header('Location: ../views/teacher/subscriptionManagment.php');
 
+            }
+            else
             header('Location: ../views/user/allcourses.php');
             exit();
         }
