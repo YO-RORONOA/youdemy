@@ -33,7 +33,7 @@ class LoginController
 
             if (!empty($this->text_error)) {
                 $_SESSION['text_error'] = $this->text_error;
-                header('Location: ../views/login.php');
+                header('Location: ../views/auth/login.php');
                 exit();
             }
 
