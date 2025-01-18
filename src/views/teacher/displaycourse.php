@@ -61,43 +61,10 @@ if($_SESSION['user_role'] == 'teacher' && isset($_SESSION['user_id']))
     <title>Course Listing - Youdemy</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../../assets/styles/sidebarAdmin.css" rel="stylesheet">
-    <style>
-        .navbar {
-            background-color: rgb(0, 128, 255);
-        }
+    <link href="../../../assets/styles/checkbox.css" rel="stylesheet">
+    <link href="../../../assets/styles/teacherheader.css" rel="stylesheet">
 
-        .navbar .nav-link {
-            color: #fff;
-        }
 
-        .navbar .nav-link:hover {
-            background-color: rgb(28, 114, 194);
-            border-radius: 5px;
-        }
-
-        .navbar-brand {
-            color: #fff;
-            font-weight: bold;
-        }
-
-        .search-bar {
-            width: 100%;
-            max-width: 400px;
-        }
-
-        @media (max-width: 768px) {
-            .navbar .nav-link {
-                display: block;
-                margin: 5px 0;
-            }
-
-            .search-bar {
-                margin-top: 10px;
-                width: 100%;
-            }
-        }
-    </style>
 </head>
 <body>
     <!-- Header with Navigation -->
@@ -114,6 +81,9 @@ if($_SESSION['user_role'] == 'teacher' && isset($_SESSION['user_id']))
                 <li class="nav-item">
                     <a class="nav-link" href="./displaycourse.php">Manage Couses</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./subscriptionManagment.php">subscription Management</a>
+                </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2 search-bar" type="search" placeholder="Search" aria-label="Search" />
@@ -128,12 +98,12 @@ if($_SESSION['user_role'] == 'teacher' && isset($_SESSION['user_id']))
             <?php foreach ($allcourses as $course): ?>
             <div class="col">
                 <div class="card h-100">
-                    <img src="../../../assets/pics/2020_05_software-development-i1.jpg" class="card-img-top" alt="Course Image">
+                    <img src="<?= htmlspecialchars($course['wallpaper_url']) ?>" class="card-img-top" alt="Course Image">
                     <div class="card-body">
                         <h5 class="card-title"><?= htmlspecialchars($course['title']) ?></h5>
                         <p class="card-text"><?= htmlspecialchars($course['description']) ?></p>
                         <button class="btn btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#courseModal" onclick="loadData(<?= $course['id'] ?>)" data-id="<?= $course['id'] ?>">Modify Course</button>
-                        <a href="#" class="btn btn-danger" onclick="fetchdata('teachercontroller/CourseController', <?= $course['id'] ?>, 'course')">Delete Course</a>
+                        <a class="btn btn-danger" onclick="fetchdata('teachercontroller/CourseController', <?= $course['id'] ?>, 'course')">Delete Course</a>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">4.5 (200 reviews)</small>
@@ -217,5 +187,7 @@ if($_SESSION['user_role'] == 'teacher' && isset($_SESSION['user_id']))
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- <script src="../../../assets/js/usersAjax.js"></script> -->
     <script src="../../../assets/js/courseAjax.js"></script>
+    <script src="../../../assets/js/deletebutt.js"></script>
+
 </body>
 </html>

@@ -187,6 +187,8 @@ elseif (!empty($_POST['courseId']) && $_SERVER['REQUEST_METHOD'] === 'POST')
     $controller->updateCourse($courseId, $title, $description, $tagsId, $content, $teacherId, $categoryId, $wallpaper, $content_type, $video_hours, $nb_articles, $nb_resources);
     $controller->deleteTagsFromAssTable($courseId);
     $controller->insertTagsFromAssTable($tagsId, $courseId);
+    header('Location: ../../views/teacher/displaycourse.php');
+
 }
 
 
@@ -205,7 +207,8 @@ if (isset($_GET['action']) == 'edit' && isset($_GET['id'])) {
     $id= $_GET['id'];
 
     $course = $controller->fetchCourseById($id);
-    echo json_encode($course); 
+    echo json_encode($course);
+     
 }
 
 

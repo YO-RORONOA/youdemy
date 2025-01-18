@@ -29,7 +29,34 @@ if ($selectedCourseId) {
     <title>Course Enrollments - Teacher Dashboard</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="../../../assets/styles/teacherheader.css" rel="stylesheet">
 </head>
+
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Course Panel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="./createCourse.php">Create Course</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./displaycourse.php">Manage Couses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./subscriptionManagment.php">subscription Management</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2 search-bar" type="search" placeholder="Search" aria-label="Search" />
+            </form>
+        </div>
+    </nav>
 <body>
     <div class="container mt-5">
         <h2>Course Enrollments</h2>

@@ -24,46 +24,14 @@ $tags = $tagcontroller->getAllTags();
     <link rel="stylesheet" href="../../../assets/styles/styles.css">
     <link rel="stylesheet" href="../../../assets/styles/checkbox.css">
     <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@5.9.0/dist/css/coreui.min.css" rel="stylesheet" integrity="sha384-Ve7hQpTs/xy/JZqnD4/SWFwF0wi2txt/YGb48ABl4PnkLahmKdTS0EMBgFX2v4Hr" crossorigin="anonymous">
+    <link href="../../../assets/styles/teacherheader.css" rel="stylesheet">
+    <link href="../../../assets/styles/allcourses.css" rel="stylesheet">
+
+
 
 
 </head>
-<style>
 
-.navbar {
-            background-color: rgb(0, 128, 255);
-        }
-
-        .navbar .nav-link {
-            color: #fff;
-        }
-
-        .navbar .nav-link:hover {
-            background-color: rgb(28, 114, 194);
-            border-radius: 5px;
-        }
-
-        .navbar-brand {
-            color: #fff;
-            font-weight: bold;
-        }
-
-        .search-bar {
-            width: 100%;
-            max-width: 400px;
-        }
-
-        @media (max-width: 768px) {
-            .navbar .nav-link {
-                display: block;
-                margin: 5px 0;
-            }
-
-            .search-bar {
-                margin-top: 10px;
-                width: 100%;
-            }
-        }
-    </style>
 </head>
 <body>
     <!-- Header with Navigation -->
@@ -79,6 +47,9 @@ $tags = $tagcontroller->getAllTags();
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./displaycourse.php">Manage Couses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./subscriptionManagment.php">subscription Management</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">

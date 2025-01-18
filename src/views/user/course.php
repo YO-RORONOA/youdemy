@@ -74,17 +74,22 @@ if (isset($_SESSION['user_id'])) {
 
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Courses</a>
+                        <a class="nav-link" href="./allCourses.php">Courses</a>
                     </li>
                     <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'student'): ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Your Courses</a>
                         </li>
                     <?php endif; ?>
+                    <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../admin/admindash.php">Back to dashboard</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
 
                 <div class="navbar-nav ml-auto">
-                    <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'student'): ?>
+                    <?php if (isset($_SESSION['user_role'])): ?>
                         <!-- Logged in state -->
                         <a class="btn btn-outline-danger" href="../../controllers/auth/logout.php">Logout</a>
                     <?php else: ?>

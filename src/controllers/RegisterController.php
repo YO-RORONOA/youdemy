@@ -25,6 +25,17 @@ class Registercontroller
         $this->user = new Users($this->db);
     }
 
+    public function emailExists($email)
+    {
+    $query = "SELECT COUNT(*) AS count FROM users WHERE email = :email";
+    $stmt = $this->db->prepare($query);
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $result['count'] > 0;
+    }
+
     public function validateform($data)
     {
 
@@ -48,6 +59,9 @@ class Registercontroller
             } elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
                 $error_message['email'] = "Please enter a valid email address.";
             }
+            elseif ($this->emailExists($this->email)) { 
+                $error_message['email'] = "This email is already registered.";
+            }
 
             if (empty($this->password)) {
                 $error_message['password'] = "Password is required.";
@@ -69,7 +83,7 @@ class Registercontroller
             if (!empty($error_message)) {
                 $_SESSION['error_message'] = $error_message;
                 $_SESSION['formdata'] = $formdata;
-                header("Location: ../views/register.php");
+                header("Location: ../views/auth/register.php");
                 exit;
             } else
                 $this->createuser();

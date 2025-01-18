@@ -74,7 +74,7 @@ $allusers = $dashUser->getAllusers();
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="../user/allCourses.php">
                             <i class="bi bi-collection-play me-1"></i> Courses
                         </a>
                     </li>

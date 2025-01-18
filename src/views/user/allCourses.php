@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require '../../controllers/student/coursesController.php';
 
 
@@ -25,13 +25,14 @@ $allcourses = $controller->fetchAllCourses();
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">Youdemy</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarContent">
                 <form class="search-form">
                     <div class="input-group">
@@ -46,19 +47,28 @@ $allcourses = $controller->fetchAllCourses();
 
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="./createCourse.php">Create Course</a>
+                        <a class="nav-link" href="./allCourses.php">Courses</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./displaycourse.php">Manage Courses</a>
-                    </li>
+                    <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'student'): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Your Courses</a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../admin/admindash.php">Back to dashboard</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
 
                 <div class="navbar-nav ml-auto">
                     <?php if (isset($_SESSION['user_role'])): ?>
-                        <a class="btn btn-outline-danger" href="logout.php">Logout</a>
+                        <!-- Logged in state -->
+                        <a class="btn btn-outline-danger" href="../../controllers/auth/logout.php">Logout</a>
                     <?php else: ?>
-                        <a class="nav-link" href="login.php">Login</a>
-                        <a class="btn btn-primary" href="register.php">Register</a>
+                        <!-- Logged out state -->
+                        <a class="nav-link" href="../auth/login.php">Login</a>
+                        <a class="btn btn-primary" href="../auth/register.php">Register</a>
                     <?php endif; ?>
                 </div>
             </div>

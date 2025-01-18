@@ -45,6 +45,11 @@ class LoginController
                 $_SESSION['text_error'] = $this->text_error;
                 $this->redirectlogin();
             }
+            if ($userdata['role'] === 'admin') {
+                $this->text_error['!user'] = "Email doesn't exist.";
+                header('Location: ../views/auth/adminLogin.php');
+                exit;
+            }
             if (!password_verify($this->password, $userdata['password'])) {
                 $this->text_error['!password'] = "Password is incorrect.";
                 $_SESSION['text_error'] = $this->text_error;

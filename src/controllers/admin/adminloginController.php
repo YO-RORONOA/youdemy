@@ -60,12 +60,12 @@ class AdminLoginController {
             }
 
             // Success - Set session variables
-            $_SESSION['admin_id'] = $user['id'];
-            $_SESSION['admin_role'] = $user['role'];
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_role'] = $user['role'];
             $_SESSION['last_activity'] = time();
 
             // Redirect to admin dashboard
-            header('Location: ../admin/dashboard.php');
+            header('Location: ../../views/admin/admindash.php');
             exit();
 
         } catch (Exception $e) {

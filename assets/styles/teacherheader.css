@@ -1,0 +1,45 @@
+.navbar {
+    background-color: rgb(0, 128, 255);
+}
+
+.navbar .nav-link {
+    color: #fff;
+}
+
+.navbar .nav-link:hover {
+    background-color: rgb(28, 114, 194);
+    border-radius: 5px;
+}
+
+.navbar-brand {
+    color: #fff;
+    font-weight: bold;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 400px;
+}
+
+@media (max-width: 768px) {
+    .navbar .nav-link {
+        display: block;
+        margin: 5px 0;
+    }
+
+    .search-bar {
+        margin-top: 10px;
+        width: 100%;
+    }
+}
+
+
+.card-text{
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    }
+    
