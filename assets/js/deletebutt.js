@@ -1,18 +1,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 function fetchdata(controller, id, type) {
     if (confirm(`Are you sure you want to delete this ${type}?`)) {
         fetch(`../../controllers/${controller}.php`, {

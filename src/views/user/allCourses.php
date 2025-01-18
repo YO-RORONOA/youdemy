@@ -72,7 +72,7 @@ $allcourses = $controller->fetchAllCourses();
             <?php foreach ($allcourses as $course): ?>
                 <div class="col">
                     <div class="card h-100">
-                        <img src="../../../assets/pics/2020_05_software-development-i1.jpg" class="card-img-top" alt="Course Image">
+                        <img src="<?= htmlspecialchars($course['wallpaper_url']) ?>" class="card-img-top" alt="Course Image">
                         <div class="card-body">
                             <h5 class="card-title"><?= htmlspecialchars($course['title']) ?></h5>
                             <p class="card-text"><?= htmlspecialchars($course['description']) ?></p>

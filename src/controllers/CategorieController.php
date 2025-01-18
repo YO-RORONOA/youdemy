@@ -104,7 +104,7 @@ if (isset($_GET['id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if ($_POST['action'] === 'delete') {
         $controller = new CategorieController();
-        $categoryId = intval($_POST['category_id']);
+        $categoryId = intval($_POST['id']);
 
         if ($controller->deleteCategory($categoryId)) {
             echo json_encode(['success' => true]);
