@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 
 require_once __DIR__ . '/../../controllers/TagController.php';
@@ -89,6 +88,23 @@ $index = 1;
                 <h4 class="mb-0">Manage Tags</h4>
             </div>
             <div class="card-body">
+            <?php if (isset($_SESSION['error_message'])): ?>
+                    <div class="alert alert-danger">
+                        <?php 
+                        echo implode($_SESSION['error_message']);
+                        unset($_SESSION['error_message']);
+                        ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if (isset($_SESSION['success_message'])): ?>
+                    <div class="alert alert-success">
+                        <?php 
+                        echo $_SESSION['success_message'];
+                        unset($_SESSION['success_message']);
+                        ?>
+                    </div>
+                <?php endif; ?>
                 <form action="../../controllers/TagController.php" method="POST" class="mb-4">
                     <div class="mb-3">
                         <label for="tag_name" class="form-label">Tag Name:</label>
