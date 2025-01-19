@@ -119,11 +119,11 @@ $allusers = $dashUser->getAllusers();
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="badge badge-primary"><?= htmlspecialchars($user['role']) ?></span>
+                                        <span class="badge bg-primary"><?= htmlspecialchars($user['role']) ?></span>
                                     </td>
-                                    <td><?= date('m/d/Y', strtotime($user['created_at'])) ?></td>
+                                    <td><?= date('d/m/Y', strtotime($user['created_at'])) ?></td>
                                     <td>
-                                        <span class="statub badge badge-<?= $user['status'] === 'active' ? 'success' : ($user['status'] === 'suspended' ? 'warning' : 'secondary') ?>">
+                                        <span class="statub badge bg-<?= $user['status'] === 'active' ? 'success' : ($user['status'] === 'suspended' ? 'warning' : 'secondary') ?>">
                                             <?= ucfirst($user['status']) ?>
                                         </span>
                                     </td>

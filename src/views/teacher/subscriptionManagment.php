@@ -4,7 +4,7 @@
 require_once __DIR__ . '/../../controllers/teachercontroller/enrollmentManagmentController.php';
 
 
-if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'teacher') {
+if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'teacher' && $_SESSION['user_status'] !== 'active') {
     header('Location: ../auth/login.php');
     exit;
 }

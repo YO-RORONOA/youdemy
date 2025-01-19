@@ -1,6 +1,8 @@
 <?php
+session_start();
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../classes/Categorie.php';
+
 
 
 
@@ -31,6 +33,9 @@ class CategorieController
         } elseif (!preg_match("/^[a-zA-Z\s]+$/", $name_categorie)) {
             $this->error_message['error_message'] = "Category name must only contain letters and spaces.";
         }
+        elseif ($this->categoryExists($name_categorie)) {
+            $this->error_message['error_message'] = "This category already exists.";
+        }
 
 
         if (!empty($this->error_message)) {
@@ -57,6 +62,9 @@ class CategorieController
 
     public function editCategories($id, $newcategorie)
     {
+        if ($this->categoryHasCourses($id)) {
+            return false; // Cannot delete category with associated courses
+        }
         return $this->categorie->editCategory($id, $newcategorie);
     }
 
@@ -74,6 +82,29 @@ class CategorieController
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+
+    public function categoryHasCourses($categoryId)
+    {
+        $sql = "SELECT COUNT(*) FROM course WHERE category_id = :category_id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':category_id', $categoryId, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        return $stmt->fetchColumn() > 0;
+    }
+
+    public function categoryExists($categoryName)
+    {
+        $sql = "SELECT COUNT(*) FROM categories WHERE LOWER(name) = LOWER(:name)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':name', $categoryName, PDO::PARAM_STR);
+        $stmt->execute();
+        
+        return $stmt->fetchColumn() > 0;
+    }
+
+
 }
 
 
@@ -105,6 +136,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if ($_POST['action'] === 'delete') {
         $controller = new CategorieController();
         $categoryId = intval($_POST['id']);
+
+        if ($controller->categoryHasCourses($categoryId)) {
+            echo json_encode([
+                'success' => false, 
+                'message' => 'Cannot delete this category because it has associated courses.'
+            ]);
+            exit;
+        }
 
         if ($controller->deleteCategory($categoryId)) {
             echo json_encode(['success' => true]);

@@ -50,6 +50,21 @@ class LoginController
                 header('Location: ../views/auth/adminLogin.php');
                 exit;
             }
+            if ($userdata['status'] !== 'suspended') {
+                $this->text_error['!user'] = "you account is suspended";
+                $_SESSION['text_error'] = $this->text_error;
+                $this->redirectlogin();
+            }
+            if ($userdata['status'] !== 'inactive') {
+                $this->text_error['!user'] = "you account is not activated";
+                $_SESSION['text_error'] = $this->text_error;
+                $this->redirectlogin();
+            }
+            if ($userdata['status'] !== 'deleted') {
+                $this->text_error['!user'] = "you account is deleted";
+                $_SESSION['text_error'] = $this->text_error;
+                $this->redirectlogin();
+            }
             if (!password_verify($this->password, $userdata['password'])) {
                 $this->text_error['!password'] = "Password is incorrect.";
                 $_SESSION['text_error'] = $this->text_error;
@@ -60,7 +75,7 @@ class LoginController
             $_SESSION['user_id'] = $userdata['id'];
             $_SESSION['user_role'] = $userdata['role'];
             $_SESSION['user_name'] = $userdata['name'];
-            $_SESSION['user_status'] = $userdata['name'];
+            $_SESSION['user_status'] = $userdata['status'];
             if($userdata['role'] == 'teacher')
             {
             header('Location: ../views/teacher/subscriptionManagment.php');
