@@ -9,7 +9,6 @@ session_start();
     <title>Youdemy Admin Portal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../assets/styles/adminlogin.css">
-
 </head>
 <body>
     <div class="container min-vh-100 d-flex justify-content-center align-items-center py-5">

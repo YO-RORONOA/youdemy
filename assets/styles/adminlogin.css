@@ -1,0 +1,98 @@
+:root {
+    --primary-dark: #1a1c2e;
+    --secondary-dark: #252942;
+    --accent-blue: #3498db;
+    --text-light: #e4e6f1;
+}
+
+body {
+    background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+    min-height: 100vh;
+    color: var(--text-light);
+}
+
+.admin-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.logo-area {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.lock-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--accent-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.form-control {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    padding: 0.8rem;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-blue);
+    color: var(--text-light);
+    box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+}
+
+.btn-primary {
+    background: var(--accent-blue);
+    border: none;
+    padding: 0.8rem;
+}
+
+.error-message {
+    background: rgba(231, 76, 60, 0.1);
+    border-left: 4px solid #e74c3c;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.loading .btn-primary {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.loading .btn-primary::after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ffffff;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+.form-label {
+    color: var(--text-light);
+    opacity: 0.9;
+}
+
+.alert {
+    border-radius: 10px;
+}

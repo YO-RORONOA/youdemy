@@ -2,6 +2,8 @@
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../classes/User.php';
 
+
+
 session_start();
 
 class LoginController
@@ -17,7 +19,13 @@ class LoginController
         $database = new Database;
         $this->db = $database->connect();
         $this->user = new Users($this->db);
+
+        if (empty($_SESSION['csrf_token'])) {
+            
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
     }
+    
 
     public function loginvalidation($data)
     {
@@ -31,14 +39,19 @@ class LoginController
                 $this->text_error['email2'] = "Please enter a valid email address.";
             }
 
+            if (!isset($data['csrf_token']) || $data['csrf_token'] !== $_SESSION['csrf_token']) {
+            $this->text_error['email2'] = "invalide token.";
+
+            }
+
             if (!empty($this->text_error)) {
                 $_SESSION['text_error'] = $this->text_error;
                 header('Location: ../views/auth/login.php');
                 exit();
             }
+            
 
             $userdata = $this->user->getUserbyemail($this->email);
-
 
             if (!$userdata) {
                 $this->text_error['!user'] = "User not found.";

@@ -49,6 +49,7 @@ if(isset($_SESSION['user_id']))
                     <div class="card-body">
                         <h1 class="card-title text-center mb-4">Login</h1>
                         <form method="POST" action="../../controllers/loginController.php">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? ''); ?>">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input name="email" type="email" class="form-control" id="email" placeholder="Jane Doe">
