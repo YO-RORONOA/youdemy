@@ -4,9 +4,23 @@
 require_once __DIR__ . '/../../controllers/teachercontroller/enrollmentManagmentController.php';
 
 
-if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'teacher' && $_SESSION['user_status'] !== 'active') {
-    header('Location: ../auth/login.php');
-    exit;
+if ($_SESSION['user_role'] != 'teacher')
+{
+    $_SESSION['acess'] = 'access_denied';
+    header("Location: ../auth/login.php");
+    exit();
+}
+if ($_SESSION['user_role'] == 'teacher' && $_SESSION['user_role'] == 'inactive' )
+{
+    $_SESSION['acess'] = 'your account is not active';
+    header("Location: ../auth/login.php");
+    exit();
+}
+if ($_SESSION['user_role'] == 'teacher' && $_SESSION['user_role'] == 'deleted' )
+{
+    $_SESSION['acess'] = 'your account is deleted';
+    header("Location: ../auth/login.php");
+    exit();
 }
 
 $controller = new enrollmentManagment();
@@ -28,6 +42,8 @@ if ($selectedCourseId) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Enrollments - Teacher Dashboard</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="../../../assets/styles/teacherheader.css" rel="stylesheet">
 </head>
@@ -35,28 +51,42 @@ if ($selectedCourseId) {
 </head>
 <body>
     <!-- Header with Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">Course Panel</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <i class="bi bi-mortarboard-fill me-2"></i>
+            Course Panel
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="./createCourse.php">Create Course</a>
+                    <a class="nav-link active" href="./createCourse.php">
+                        <i class="bi bi-plus-circle me-1"></i> Create Course
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./displaycourse.php">Manage Couses</a>
+                    <a class="nav-link" href="./displaycourse.php">
+                        <i class="bi bi-pencil-square me-1"></i> Manage Courses
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./subscriptionManagment.php">subscription Management</a>
+                    <a class="nav-link" href="./subscriptionManagment.php">
+                        <i class="bi bi-people me-1"></i> Subscription Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../controllers/auth/logout.php">
+                        <i class="bi bi-box-arrow-right me-1"></i> Logout
+                    </a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2 search-bar" type="search" placeholder="Search" aria-label="Search" />
-            </form>
+           
         </div>
-    </nav>
+    </div>
+</nav>
 <body>
     <div class="container mt-5">
         <h2>Course Enrollments</h2>

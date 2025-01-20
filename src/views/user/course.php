@@ -103,7 +103,6 @@ if (isset($_SESSION['user_id'])) {
     </nav>
 
 
-    <!-- Rest of the existing content -->
     <div class="course-header">
         <div class="container">
             <h2><?php echo htmlspecialchars($course['title']); ?></h2>
@@ -111,7 +110,21 @@ if (isset($_SESSION['user_id'])) {
             <!-- Mobile-first pricing section -->
             <div class="pricing-card d-md-none">
                 <div class="price-tag">$10.00<span class="text-muted" style="font-size: 1rem;"> /month</span></div>
-                <button class="btn btn-primary btn-lg btn-block">Start Your Free Trial</button>
+                <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'student'): ?>
+                        <button id="enrollButton"
+                            class="btn btn-lg btn-block <?php echo $isEnrolled ? 'btn-danger' : 'btn-primary'; ?>"
+                            data-course-id="<?= htmlspecialchars($course['id']); ?>">
+                            <?php echo $isEnrolled ? 'Unsubscribe from Course' : 'Subscribe to Course'; ?>
+                        </button>
+                    <?php elseif (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'teacher'): ?>
+                        <div class="alert alert-info">
+                            Teacher accounts cannot subscribe to courses
+                        </div>
+                    <?php else: ?>
+                        <button class="btn btn-lg btn-block btn-primary" disabled>
+                            Please Login to Subscribe
+                        </button>
+                    <?php endif; ?>
                 <small class="d-block text-center text-muted mt-2">Starting at $10.00 per month after trial</small>
             </div>
         </div>
@@ -121,7 +134,7 @@ if (isset($_SESSION['user_id'])) {
         <div class="row">
             <div class="col-md-8">
                 <div class="video-container my-4">
-                    <iframe src="https://www.youtube.com/watch?v=LqYIKYEnX7Y&list=RDLqYIKYEnX7Y&start_radio=1" allowfullscreen></iframe>
+                    <iframe src="<?php echo htmlspecialchars($course['content']); ?>" allowfullscreen></iframe>
                 </div>
 
                 <div class="card my-4">
@@ -210,7 +223,7 @@ if (isset($_SESSION['user_id'])) {
                         <span>30-day money-back guarantee</span>
                     </div>
 
-                    <button class="btn btn-primary btn-lg btn-block">Subscribe to this Course</button>
+                    <button class="btn btn-primary btn-lg btn-block">free trial to all our corses</button>
                 </div>
             </div>
         </div>

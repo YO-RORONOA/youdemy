@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             alert('User activated successfully!');
 
                             const row = this.closest('tr');
-                            row.querySelector('.statub').classList.remove('badge-warning');
-                            row.querySelector('.statub').classList.add('badge-success');
+                            row.querySelector('.statub').classList.remove('bg-warning');
+                            row.querySelector('.statub').classList.add('bg-success');
                             row.querySelector('.statub').textContent = 'Active';
                             this.style.display = 'none';
                             row.querySelector('.suspend-btn').style.display = 'inline-block';
@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             alert('User suspended successfully!');
 
                             const row = this.closest('tr');
-                            row.querySelector('.statub').classList.remove('badge-success');
-                            row.querySelector('.statub').classList.add('badge-warning');
+                            row.querySelector('.statub').classList.remove('bg-success');
+                            row.querySelector('.statub').classList.add('bg-warning');
                             row.querySelector('.statub').textContent = 'Suspended';
                             this.style.display = 'none';
                             row.querySelector('.activate-btn').style.display = 'inline-block';
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             alert('User status changed to Deleted!');
 
                             const row = this.closest('tr');
-                            row.querySelector('.statub').className = 'statub badge badge-secondary';
+                            row.querySelector('.statub').className = 'statub badge bg-secondary';
                             row.querySelector('.statub').textContent = 'Deleted';
                             this.style.display = 'none';
                             row.querySelector('.activate-btn').style.display = 'inline-block';

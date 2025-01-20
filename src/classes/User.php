@@ -11,6 +11,7 @@ class Users
     private $password;
     private $role;
     private $profil;
+    private $status;
     private $isApproved;
     private $createdAt;
 
@@ -20,7 +21,7 @@ class Users
         $this->db = $db;
     }
 
-    public function setAttributes($name, $email, $password, $role ='student', $profil)
+    public function setAttributes($name, $email, $password, $role ='student', $profil, $status='inactive')
     {
         $this->name = $name;
         $this->email = $email;
@@ -29,19 +30,21 @@ class Users
         $this->isApproved = ($role === 'teacher') ? false : true;
         $this->createdAt = date('Y-m-d H:i:s');
         $this->profil = $profil;
+        $this->status= $status;
     }
 
 
     public function createUser()
     {
-        $query = "INSERT into users(name, email, password, role, profil)
-        values(:name, :email, :password, :role, :profil)";
+        $query = "INSERT into users(name, email, password, role, profil, status)
+        values(:name, :email, :password, :role, :profil, :status)";
         $stmt = $this->db->prepare($query);
-        $stmt->bindparam('name', $this->name);
-        $stmt->bindparam('email', $this->email);
-        $stmt->bindparam('password', $this->password);
-        $stmt->bindparam('role', $this->role);
-        $stmt->bindparam('profil', $this->profil);
+        $stmt->bindparam(':name', $this->name);
+        $stmt->bindparam(':email', $this->email);
+        $stmt->bindparam(':password', $this->password);
+        $stmt->bindparam(':role', $this->role);
+        $stmt->bindparam(':profil', $this->profil);
+        $stmt->bindparam(':status', $this->status);
         return $stmt->execute();
     }
 

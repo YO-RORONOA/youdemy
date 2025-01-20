@@ -7,7 +7,10 @@ unset($_SESSION['text_error']);
 $acess = isset($_SESSION['acess']) ? $_SESSION['acess'] : [];
 unset($_SESSION['acess']);
 
-
+if(isset($_SESSION['user_id']))
+{
+    header('Location: ../../index.php');
+}
 ?>
 
 <?php if (!empty($errors)): ?>

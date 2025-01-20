@@ -3,6 +3,7 @@ session_start();
 require '../../controllers/student/coursesController.php';
 
 
+
 $controller = new CoursesController;
 $allcourses = $controller->fetchAllCourses();
 // print_r($allcourses);

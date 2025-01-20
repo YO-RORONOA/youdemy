@@ -8,12 +8,12 @@ $tags = $controller->getAllTags();
 $index = 1;
 
 
-// if ($_SESSION['user_role'] != 'admin')
-// {
-//     $_SESSION['acess'] = 'access_denied';
-//     header("Location: ../login.php");
-//     exit();
-// }
+if ($_SESSION['user_role'] != 'admin')
+{
+    $_SESSION['acess'] = 'access_denied';
+    header("Location: ../auth/login.php");
+    exit();
+}
 ?>
 
 

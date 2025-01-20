@@ -50,17 +50,17 @@ class LoginController
                 header('Location: ../views/auth/adminLogin.php');
                 exit;
             }
-            if ($userdata['status'] !== 'suspended') {
+            if ($userdata['status'] == 'suspended') {
                 $this->text_error['!user'] = "you account is suspended";
                 $_SESSION['text_error'] = $this->text_error;
                 $this->redirectlogin();
             }
-            if ($userdata['status'] !== 'inactive') {
+            if ($userdata['status'] == 'inactive') {
                 $this->text_error['!user'] = "you account is not activated";
                 $_SESSION['text_error'] = $this->text_error;
                 $this->redirectlogin();
             }
-            if ($userdata['status'] !== 'deleted') {
+            if ($userdata['status'] == 'deleted') {
                 $this->text_error['!user'] = "you account is deleted";
                 $_SESSION['text_error'] = $this->text_error;
                 $this->redirectlogin();

@@ -87,12 +87,19 @@ class Registercontroller
                 exit;
             } else
                 $this->createuser();
-            header('Location: ../views/login.php');
+            header('Location: ../views/auth/login.php');
         }
     }
-
+   
     public function createuser()
     {
+        if($this->role == 'student')
+        {
+            $this->user->setattributes($this->name, $this->email, $this->hashedpassword, $this->role, $this->profil, 'active' );
+            $this->user->createuser();
+
+        }
+        else
         $this->user->setattributes($this->name, $this->email, $this->hashedpassword, $this->role, $this->profil);
         $this->user->createuser();
     }

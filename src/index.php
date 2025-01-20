@@ -47,7 +47,7 @@ $popularTags = $homePage->getPopularTags();
 
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="./createCourse.php">Create Course</a>
+                        <a class="nav-link" href="./views/user/allCourses.php">all courses</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./displaycourse.php">Manage Courses</a>
@@ -56,7 +56,7 @@ $popularTags = $homePage->getPopularTags();
 
                 <div class="navbar-nav ml-auto">
                     <?php if (isset($_SESSION['user_role'])): ?>
-                        <a class="btn btn-outline-danger" href="logout.php">Logout</a>
+                        <a class="btn btn-outline-danger" href="./controllers/auth/logout.php">Logout</a>
                     <?php else: ?>
                         <a class="nav-link" href="login.php">Login</a>
                         <a class="btn btn-primary" href="register.php">Register</a>

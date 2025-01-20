@@ -3,6 +3,13 @@ session_start();
 require_once __DIR__ . '/../../controllers/admin/DashboardController.php';
 
 
+if ($_SESSION['user_role'] != 'admin')
+{
+    $_SESSION['acess'] = 'access_denied';
+    header("Location: ../auth/login.php");
+    exit();
+}
+
 $dashboard = new DashboardController();
 $totalCourses = $dashboard->getTotalCourses();
 $coursesByCategory = $dashboard->getCoursesByCategory();

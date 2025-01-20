@@ -3,6 +3,26 @@ require '../../controllers/teachercontroller/courseController.php';
 require_once __DIR__ . '/../../controllers/categorieController.php';
 require_once __DIR__ . '/../../controllers/TagController.php';
 
+
+if ($_SESSION['user_role'] != 'teacher')
+{
+    $_SESSION['acess'] = 'access_denied';
+    header("Location: ../auth/login.php");
+    exit();
+}
+if ($_SESSION['user_role'] == 'teacher' && $_SESSION['user_role'] == 'inactive' )
+{
+    $_SESSION['acess'] = 'your account is not active';
+    header("Location: ../auth/login.php");
+    exit();
+}
+if ($_SESSION['user_role'] == 'teacher' && $_SESSION['user_role'] == 'deleted' )
+{
+    $_SESSION['acess'] = 'your account is deleted';
+    header("Location: ../auth/login.php");
+    exit();
+}
+
 $controller = new CategorieController;
 $categories = $controller->getAllCategories();
 $tagcontroller = new TagController;

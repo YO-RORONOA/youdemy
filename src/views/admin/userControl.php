@@ -7,22 +7,22 @@ require '../../controllers/userController.php';
 $dashUser = new Usercontroller;
 $allusers = $dashUser->getAllusers();
 
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     $userId = $_POST['user_id'];
-//     $action = $_POST['action'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $userId = $_POST['user_id'];
+    $action = $_POST['action'];
 
-//     $result = $dashUser->handleRequest($action, $userId);
+    $result = $dashUser->handleRequest($action, $userId);
 
-//     echo json_encode(['success' => $result]);
-//     exit;
-// }
+    echo json_encode(['success' => $result]);
+    exit;
+}
 
-// if ($_SESSION['user_role'] != 'admin')
-// {
-//     $_SESSION['acess'] = 'access_denied';
-//     header("Location: ../login.php");
-//     exit();
-// }
+if ($_SESSION['user_role'] != 'admin')
+{
+    $_SESSION['acess'] = 'access_denied';
+    header("Location: ../auth/login.php");
+    exit();
+}
 
 ?>
 <!DOCTYPE html>
